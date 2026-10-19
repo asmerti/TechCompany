@@ -150,6 +150,54 @@ footer b{color:var(--yellow);font-family:var(--cond);font-size:18px}
 .card .pic{height:230px;display:flex;align-items:center;justify-content:center;padding:14px;background:radial-gradient(circle at 50% 42%,#FFFFFF 0,#ECECE6 70%);border-bottom:2px solid var(--ink)}
 .card .pic img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.25))}
 
+/* asistente virtual (esquina inferior izquierda) */
+.chat-btn{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;width:56px;height:56px;padding:0;display:grid;place-items:center;border:3px solid var(--ink);border-radius:50%;background:var(--red);color:#fff;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.chat-btn:hover{background:var(--red-dark)}
+.chat-btn:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.chat-btn svg{width:28px;height:28px}
+.chat-btn .dot{position:absolute;top:-5px;right:-5px;width:17px;height:17px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink)}
+.chat-panel{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:60;width:min(380px,calc(100vw - 32px));height:min(540px,calc(100vh - 130px));height:min(540px,calc(100dvh - 130px));display:flex;flex-direction:column;overflow:hidden;background:var(--surface);color:var(--text);border:3px solid var(--ink);border-radius:18px;box-shadow:0 0 0 1px var(--line),0 12px 36px rgba(0,0,0,.4);transform-origin:bottom left;animation:chat-in .18s ease-out}
+.chat-panel[hidden]{display:none}
+@keyframes chat-in{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.chat-panel{animation:none}}
+.chat-panel :focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.chat-head{flex:none;display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--red);color:#fff;border-bottom:4px solid var(--yellow)}
+.chat-head :focus-visible{outline-color:#fff}
+.chat-av{flex:none;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:var(--yellow);color:var(--ink)}
+.chat-av svg{width:22px;height:22px}
+.chat-id{flex:1;min-width:0}
+.chat-title{font-family:var(--display);font-size:20px;line-height:1.1;letter-spacing:.02em}
+.chat-status{display:flex;align-items:center;gap:6px;font-family:var(--cond);font-weight:600;font-size:14px;opacity:.95}
+.chat-status i{width:9px;height:9px;border-radius:50%;background:#3CFF4E;box-shadow:0 0 0 2px rgba(0,0,0,.25)}
+.chat-x{flex:none;width:34px;height:34px;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.25);color:#fff;font-size:24px;line-height:1;cursor:pointer}
+.chat-x:hover{background:rgba(0,0,0,.45)}
+.chat-log{flex:1;min-height:0;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--bg)}
+.chat-log .msg{display:flex;flex-direction:column;max-width:90%}
+.chat-log .msg.me{align-self:flex-end;align-items:flex-end}
+.chat-log .msg.bot{align-self:flex-start;align-items:flex-start}
+.chat-log .bub{padding:9px 13px;border-radius:14px;font-size:15px;line-height:1.45;white-space:pre-line;overflow-wrap:anywhere}
+.chat-log .bot .bub{background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px}
+.chat-log .me .bub{background:var(--red);color:#fff;border-bottom-right-radius:4px}
+.chat-log .typing{display:flex;gap:4px;padding:12px 14px}
+.chat-log .typing span{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:chat-dot 1s infinite ease-in-out}
+.chat-log .typing span:nth-child(2){animation-delay:.15s}
+.chat-log .typing span:nth-child(3){animation-delay:.3s}
+@keyframes chat-dot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+@media (prefers-reduced-motion:reduce){.chat-log .typing span{animation:none;opacity:.7}}
+.chat-log .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chat-act{display:inline-block;font-family:var(--cond);font-weight:700;font-size:15px;line-height:1;padding:8px 12px;border:2px solid var(--ink);border-radius:999px;background:var(--yellow);color:var(--ink);text-decoration:none}
+.chat-act:hover{background:#fff}
+.chat-chips{flex:none;display:flex;gap:6px;padding:8px 10px;overflow-x:auto;background:var(--surface);border-top:1px solid var(--line)}
+.chat-chips button{flex:none;white-space:nowrap;font-family:var(--cond);font-weight:600;font-size:15px;line-height:1;padding:7px 12px;border:2px solid var(--line);border-radius:999px;background:var(--bg);color:var(--text);cursor:pointer}
+.chat-chips button:hover{border-color:var(--red)}
+.chat-form{flex:none;display:flex;gap:8px;padding:8px 10px;background:var(--surface);border-top:1px solid var(--line)}
+.chat-form input{flex:1;min-width:0;width:auto;margin:0;padding:9px 14px;font:inherit;font-size:16px;border:2px solid var(--line);border-radius:999px;background:var(--bg);color:var(--text)}
+.chat-form input::placeholder{color:var(--muted)}
+.chat-form button{flex:none;width:42px;height:42px;padding:0;display:grid;place-items:center;border:0;border-radius:50%;background:var(--red);color:#fff;cursor:pointer}
+.chat-form button:hover{background:var(--red-dark)}
+.chat-form button svg{width:20px;height:20px}
+.chat-note{flex:none;margin:0;padding:0 14px 9px;font-size:12px;line-height:1.35;color:var(--muted);background:var(--surface)}
+
 /* botón de idioma (esquina inferior derecha) */
 .lang-btn{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;display:inline-flex;align-items:center;gap:8px;font-family:var(--cond);font-weight:700;font-size:19px;line-height:1;padding:11px 18px;border:3px solid var(--ink);border-radius:999px;background:var(--yellow);color:var(--ink);cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .lang-btn:hover{background:#fff}
@@ -348,6 +396,24 @@ footer b{color:var(--yellow);font-family:var(--cond);font-size:18px}
   </div>
 </footer>
 
+<button class="chat-btn" id="chat-btn" type="button" aria-label="Abrir asistente" aria-expanded="false" aria-controls="chat-panel">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h14a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-7.2L6.6 21.6a.6.6 0 0 1-1-.5V18H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z"/><circle cx="8" cy="10.5" r="1.5" fill="#C8102E"/><circle cx="12" cy="10.5" r="1.5" fill="#C8102E"/><circle cx="16" cy="10.5" r="1.5" fill="#C8102E"/></svg><span class="dot" aria-hidden="true"></span>
+</button>
+<section class="chat-panel" id="chat-panel" role="dialog" aria-label="Asistente virtual de TechCompany" hidden>
+  <header class="chat-head">
+    <div class="chat-av"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h14a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-7.2L6.6 21.6a.6.6 0 0 1-1-.5V18H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z"/><circle cx="8" cy="10.5" r="1.5" fill="#FFDD00"/><circle cx="12" cy="10.5" r="1.5" fill="#FFDD00"/><circle cx="16" cy="10.5" r="1.5" fill="#FFDD00"/></svg></div>
+    <div class="chat-id"><div class="chat-title">Asistente virtual</div><div class="chat-status"><i></i>En línea</div></div>
+    <button class="chat-x" id="chat-x" type="button" aria-label="Cerrar asistente">&times;</button>
+  </header>
+  <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-label="Conversación" data-dyn></div>
+  <div class="chat-chips" id="chat-chips" data-dyn></div>
+  <form class="chat-form" id="chat-form" autocomplete="off">
+    <input id="chat-in" type="text" maxlength="300" placeholder="Escribe tu consulta…" aria-label="Tu mensaje">
+    <button type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 11.2 21 3l-5.6 18-3.6-7.6L3 11.2z"/></svg></button>
+  </form>
+  <p class="chat-note">Asistente automático. Para casos concretos te atenderá el equipo de TechCompany.</p>
+</section>
+
 <button class="lang-btn" id="lang" type="button" lang="ca" aria-label="Cambiar el idioma a catalán">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.8 2.7 4.2 5.9 4.2 9.5s-1.4 6.8-4.2 9.5c-2.8-2.7-4.2-5.9-4.2-9.5S9.2 5.2 12 2.5z"/></svg>
   <span id="lang-label">Català</span>
@@ -358,7 +424,19 @@ footer b{color:var(--yellow);font-family:var(--cond);font-size:18px}
   /* ===== Idioma ===== */
   var LS_KEY="techcompany-lang", lang="es";
   try{ if(localStorage.getItem(LS_KEY)==="ca") lang="ca"; }catch(e){}
-  var CA={"TechCompany · PC de oficina montado a piezas": "TechCompany · PC d'oficina muntat a peces", "PC de oficina montado a piezas": "PC d'oficina muntat a peces", "PC de oficina": "PC d'oficina", "montado a piezas": "muntat a peces", "Menú principal": "Menú principal", "Inicio": "Inici", "Catálogo": "Catàleg", "Comparador": "Comparador", "Especificaciones": "Especificacions", "Hacer pedido": "Fes comanda", "Envío y garantía": "Enviament i garantia", "Contacto": "Contacte", "Elige tu equipo, consulta el detalle y haz tu pedido online. Mano de obra incluida.": "Tria el teu equip, consulta'n el detall i fes la teva comanda en línia. Mà d'obra inclosa.", "Ver catálogo": "Veure el catàleg", "Desde 599,99 euros": "Des de 599,99 euros", "desde": "des de", "total con envío": "total amb enviament", "Mano de obra incluida": "Mà d'obra inclosa", "Windows 11 instalado": "Windows 11 instal·lat", "Monitor, teclado y ratón incluidos (A y B)": "Monitor, teclat i ratolí inclosos (A i B)", "3 años de garantía y soporte": "3 anys de garantia i suport", "Tres equipos, tres presupuestos": "Tres equips, tres pressupostos", "Desde un PC básico para el día a día hasta un equipo profesional compacto. Todos los precios llevan IVA incluido.": "Des d'un PC bàsic per al dia a dia fins a un equip professional compacte. Tots els preus porten l'IVA inclòs.", "Consulta cada equipo y pulsa \"Pedir este equipo\" para ir directo al formulario.": "Consulta cada equip i prem «Demanar aquest equip» per anar directament al formulari.", "Las tres opciones, lado a lado.": "Les tres opcions, una al costat de l'altra.", "Característica": "Característica", "B · Normal": "B · Normal", "Especificaciones técnicas": "Especificacions tècniques", "Despliega cada equipo para ver todos sus componentes.": "Desplega cada equip per veure tots els seus components.", "Rellena el formulario y se abrirá un correo con tu pedido listo para enviar a TechCompany. Te contestaremos en 24 horas.": "Omple el formulari i s'obrirà un correu amb la teva comanda a punt per enviar a TechCompany. Et respondrem en 24 hores.", "Equipo": "Equip", "Cantidad": "Quantitat", "Teléfono": "Telèfon", "Nombre y apellidos": "Nom i cognoms", "Correo electrónico": "Correu electrònic", "Dirección de envío completa": "Adreça d'enviament completa", "Observaciones (opcional)": "Observacions (opcional)", "Acepto las condiciones de compra y el tratamiento de mis datos para gestionar el pedido.": "Accepto les condicions de compra i el tractament de les meves dades per gestionar la comanda.", "Enviar pedido por correo": "Enviar la comanda per correu", "Pedido preparado": "Comanda preparada", "Se ha abierto tu programa de correo. Si no se ha abierto, copia este resumen y envíalo a": "S'ha obert el teu programa de correu. Si no s'ha obert, copia aquest resum i envia'l a", "Copiar resumen": "Copiar el resum", "Abrir correo de nuevo": "Obrir el correu de nou", "Tu pedido": "La teva comanda", "Precio unidad": "Preu unitat", "Total": "Total", "Lo que incluye tu compra, sin letra pequeña.": "El que inclou la teva compra, sense lletra petita.", "Envío": "Enviament", "El envío está incluido en el precio final de las opciones A y B. La opción C se vende con IVA incluido.": "L'enviament està inclòs en el preu final de les opcions A i B. L'opció C es ven amb l'IVA inclòs.", "Montaje": "Muntatge", "La mano de obra de montaje está incluida. Recibes el equipo montado y con Windows 11 instalado.": "La mà d'obra de muntatge està inclosa. Reps l'equip muntat i amb Windows 11 instal·lat.", "Garantía": "Garantia", "3 años de garantía y soporte en todos los equipos.": "3 anys de garantia i suport en tots els equips.", "Escríbenos o llámanos si dudas entre dos equipos.": "Escriu-nos o truca'ns si dubtes entre dos equips.", "Correo": "Correu", "Preguntas frecuentes": "Preguntes freqüents", "¿Qué incluye el precio?": "Què inclou el preu?", "Componentes, montaje, Windows 11 y 3 años de soporte. En A y B también monitor, teclado y ratón, y el envío.": "Components, muntatge, Windows 11 i 3 anys de suport. En A i B també monitor, teclat i ratolí, i l'enviament.", "¿Cuánto tarda el envío?": "Quant tarda l'enviament?", "Te confirmamos el plazo por correo o teléfono al recibir tu pedido.": "Et confirmem el termini per correu o telèfon en rebre la teva comanda.", "¿Puedo cambiar algún componente?": "Puc canviar algun component?", "Sí. Indícalo en el campo de observaciones del pedido y te enviamos un presupuesto ajustado.": "Sí. Indica-ho al camp d'observacions de la comanda i t'enviem un pressupost ajustat.", "¿Cómo funciona la garantía?": "Com funciona la garantia?", "Todos los equipos tienen 3 años de garantía. Si tienes un problema, llámanos o escríbenos y lo gestionamos.": "Tots els equips tenen 3 anys de garantia. Si tens un problema, truca'ns o escriu-nos i ho gestionem.", "Precios con IVA incluido": "Preus amb l'IVA inclòs", "Opción A · Low Cost": "Opció A · Low Cost", "Opción B · Precio normal": "Opció B · Preu normal", "Opción C · Pre-Build": "Opció C · Pre-Build", "PC de oficina Low Cost": "PC d'oficina Low Cost", "PC de oficina Normal": "PC d'oficina Normal", "PC Profesional Mini HP Pro 400 G9": "PC professional Mini HP Pro 400 G9", "Total con envío": "Total amb enviament", "IVA incluido": "IVA inclòs", "Todo lo que necesitas para trabajar, con monitor, teclado y ratón incluidos.": "Tot el que necessites per treballar, amb monitor, teclat i ratolí inclosos.", "Más potencia con Core i5, SSD de 512 GB y combo inalámbrico, con monitor incluido.": "Més potència amb Core i5, SSD de 512 GB i combo sense fils, amb monitor inclòs.", "Rendimiento, escalabilidad y seguridad en un tamaño reducido.": "Rendiment, escalabilitat i seguretat en una mida reduïda.", "Caja gaming RGB": "Caixa gaming RGB", "Seguridad HP y vPro": "Seguretat HP i vPro", "Pedir": "Demanar", "Pedir este equipo": "Demanar aquest equip", "Procesador": "Processador", "Memoria RAM": "Memòria RAM", "Almacenamiento": "Emmagatzematge", "Gráficos": "Gràfics", "Fuente": "Font", "Caja": "Caixa", "Sistema operativo": "Sistema operatiu", "Teclado y ratón": "Teclat i ratolí", "Precio": "Preu", "Placa base": "Placa base", "Disipador": "Dissipador", "Referencia": "Referència", "Memoria": "Memòria", "Gráficos y audio": "Gràfics i àudio", "Red": "Xarxa", "Puertos frontales": "Ports frontals", "Puertos traseros": "Ports posteriors", "Seguridad": "Seguretat", "Formato": "Format", "ATX Mars Gaming con 2 ventiladores RGB": "ATX Mars Gaming amb 2 ventiladors RGB", "Formato mini 17,7 × 17,5 × 3,4 cm": "Format mini 17,7 × 17,5 × 3,4 cm", "No incluido": "No inclòs", "Ratón con cable HP 125": "Ratolí amb cable HP 125", "3 años": "3 anys", "Intel (incluido con el procesador)": "Intel (inclòs amb el processador)", "KOORUI Office 22 pulgadas VA FHD 120 Hz Eye Care E2212H": "KOORUI Office 22 polzades VA FHD 120 Hz Eye Care E2212H", "Mars Gaming MC-X2 ATX negra, 2 ventiladores FRGB de 12 cm y ventana lateral completa": "Mars Gaming MC-X2 ATX negra, 2 ventiladors FRGB de 12 cm i finestra lateral completa", "Combo inalámbrico Logitech MK540 Advanced": "Combo sense fils Logitech MK540 Advanced", "Intel Core i7-14700T (14.ª gen.), 20 núcleos, 28 subprocesos, turbo hasta 5 GHz, 33 MB de caché L3": "Intel Core i7-14700T (14.a gen.), 20 nuclis, 28 fils, turbo fins a 5 GHz, 33 MB de memòria cau L3", "Intel Q670 con vPro": "Intel Q670 amb vPro", "16 GB DDR5-4800 (1×16 GB), 2 ranuras DIMM": "16 GB DDR5-4800 (1×16 GB), 2 ranures DIMM", "1 USB-C 20 Gbps, 2 USB-A 10 Gbps (1 de carga), combo auriculares/micrófono": "1 USB-C 20 Gbps, 2 USB-A 10 Gbps (1 de càrrega), combo auriculars/micròfon", "17,7 × 17,5 × 3,4 cm · 1,42 kg · fuente externa de 90 W · negro": "17,7 × 17,5 × 3,4 cm · 1,42 kg · font externa de 90 W · negre", "Mano de obra incluida, 3 años de soporte.": "Mà d'obra inclosa, 3 anys de suport.", "Rellena nombre, correo, teléfono y dirección de envío.": "Omple nom, correu, telèfon i adreça d'enviament.", "Escribe un correo válido, por ejemplo nombre@dominio.com.": "Escriu un correu vàlid, per exemple nom@domini.com.", "La cantidad mínima es 1.": "La quantitat mínima és 1.", "Acepta las condiciones para continuar.": "Accepta les condicions per continuar.", "Copiado": "Copiat", "Selecciona y copia (Ctrl+C)": "Selecciona i copia (Ctrl+C)", "NUEVO PEDIDO": "NOVA COMANDA", "Nombre": "Nom", "Dirección de envío": "Adreça d'enviament", "Observaciones": "Observacions", "Pedido": "Comanda", "Cambiar el idioma a catalán": "Canvia l'idioma a castellà"};
+  var CA={"TechCompany · PC de oficina montado a piezas": "TechCompany · PC d'oficina muntat a peces", "PC de oficina montado a piezas": "PC d'oficina muntat a peces", "PC de oficina": "PC d'oficina", "montado a piezas": "muntat a peces", "Menú principal": "Menú principal", "Inicio": "Inici", "Catálogo": "Catàleg", "Comparador": "Comparador", "Especificaciones": "Especificacions", "Hacer pedido": "Fes comanda", "Envío y garantía": "Enviament i garantia", "Contacto": "Contacte", "Elige tu equipo, consulta el detalle y haz tu pedido online. Mano de obra incluida.": "Tria el teu equip, consulta'n el detall i fes la teva comanda en línia. Mà d'obra inclosa.", "Ver catálogo": "Veure el catàleg", "Desde 599,99 euros": "Des de 599,99 euros", "desde": "des de", "total con envío": "total amb enviament", "Mano de obra incluida": "Mà d'obra inclosa", "Windows 11 instalado": "Windows 11 instal·lat", "Monitor, teclado y ratón incluidos (A y B)": "Monitor, teclat i ratolí inclosos (A i B)", "3 años de garantía y soporte": "3 anys de garantia i suport", "Tres equipos, tres presupuestos": "Tres equips, tres pressupostos", "Desde un PC básico para el día a día hasta un equipo profesional compacto. Todos los precios llevan IVA incluido.": "Des d'un PC bàsic per al dia a dia fins a un equip professional compacte. Tots els preus porten l'IVA inclòs.", "Consulta cada equipo y pulsa \"Pedir este equipo\" para ir directo al formulario.": "Consulta cada equip i prem «Demana aquest equip» per anar directament al formulari.", "Las tres opciones, lado a lado.": "Les tres opcions, una al costat de l'altra.", "Característica": "Característica", "B · Normal": "B · Normal", "Especificaciones técnicas": "Especificacions tècniques", "Despliega cada equipo para ver todos sus componentes.": "Desplega cada equip per veure tots els seus components.", "Rellena el formulario y se abrirá un correo con tu pedido listo para enviar a TechCompany. Te contestaremos en 24 horas.": "Omple el formulari i s'obrirà un correu amb la teva comanda a punt per enviar a TechCompany. Et respondrem en 24 hores.", "Equipo": "Equip", "Cantidad": "Quantitat", "Teléfono": "Telèfon", "Nombre y apellidos": "Nom i cognoms", "Correo electrónico": "Correu electrònic", "Dirección de envío completa": "Adreça d'enviament completa", "Observaciones (opcional)": "Observacions (opcional)", "Acepto las condiciones de compra y el tratamiento de mis datos para gestionar el pedido.": "Accepto les condicions de compra i el tractament de les meves dades per gestionar la comanda.", "Enviar pedido por correo": "Enviar la comanda per correu", "Pedido preparado": "Comanda preparada", "Se ha abierto tu programa de correo. Si no se ha abierto, copia este resumen y envíalo a": "S'ha obert el teu programa de correu. Si no s'ha obert, copia aquest resum i envia'l a", "Copiar resumen": "Copiar el resum", "Abrir correo de nuevo": "Obrir el correu de nou", "Tu pedido": "La teva comanda", "Precio unidad": "Preu unitat", "Total": "Total", "Lo que incluye tu compra, sin letra pequeña.": "El que inclou la teva compra, sense lletra petita.", "Envío": "Enviament", "El envío está incluido en el precio final de las opciones A y B. La opción C se vende con IVA incluido.": "L'enviament està inclòs en el preu final de les opcions A i B. L'opció C es ven amb l'IVA inclòs.", "Montaje": "Muntatge", "La mano de obra de montaje está incluida. Recibes el equipo montado y con Windows 11 instalado.": "La mà d'obra de muntatge està inclosa. Reps l'equip muntat i amb Windows 11 instal·lat.", "Garantía": "Garantia", "3 años de garantía y soporte en todos los equipos.": "3 anys de garantia i suport en tots els equips.", "Escríbenos o llámanos si dudas entre dos equipos.": "Escriu-nos o truca'ns si dubtes entre dos equips.", "Correo": "Correu", "Preguntas frecuentes": "Preguntes freqüents", "¿Qué incluye el precio?": "Què inclou el preu?", "Componentes, montaje, Windows 11 y 3 años de soporte. En A y B también monitor, teclado y ratón, y el envío.": "Components, muntatge, Windows 11 i 3 anys de suport. En A i B també monitor, teclat i ratolí, i l'enviament.", "¿Cuánto tarda el envío?": "Quant tarda l'enviament?", "Te confirmamos el plazo por correo o teléfono al recibir tu pedido.": "Et confirmem el termini per correu o telèfon en rebre la teva comanda.", "¿Puedo cambiar algún componente?": "Puc canviar algun component?", "Sí. Indícalo en el campo de observaciones del pedido y te enviamos un presupuesto ajustado.": "Sí. Indica-ho al camp d'observacions de la comanda i t'enviem un pressupost ajustat.", "¿Cómo funciona la garantía?": "Com funciona la garantia?", "Todos los equipos tienen 3 años de garantía. Si tienes un problema, llámanos o escríbenos y lo gestionamos.": "Tots els equips tenen 3 anys de garantia. Si tens un problema, truca'ns o escriu-nos i ho gestionem.", "Precios con IVA incluido": "Preus amb l'IVA inclòs", "Opción A · Low Cost": "Opció A · Low Cost", "Opción B · Precio normal": "Opció B · Preu normal", "Opción C · Pre-Build": "Opció C · Pre-Build", "PC de oficina Low Cost": "PC d'oficina Low Cost", "PC de oficina Normal": "PC d'oficina Normal", "PC Profesional Mini HP Pro 400 G9": "PC professional Mini HP Pro 400 G9", "Total con envío": "Total amb enviament", "IVA incluido": "IVA inclòs", "Todo lo que necesitas para trabajar, con monitor, teclado y ratón incluidos.": "Tot el que necessites per treballar, amb monitor, teclat i ratolí inclosos.", "Más potencia con Core i5, SSD de 512 GB y combo inalámbrico, con monitor incluido.": "Més potència amb Core i5, SSD de 512 GB i combo sense fils, amb monitor inclòs.", "Rendimiento, escalabilidad y seguridad en un tamaño reducido.": "Rendiment, escalabilitat i seguretat en una mida reduïda.", "Caja gaming RGB": "Caixa gaming RGB", "Seguridad HP y vPro": "Seguretat HP i vPro", "Pedir": "Demana", "Pedir este equipo": "Demana aquest equip", "Procesador": "Processador", "Memoria RAM": "Memòria RAM", "Almacenamiento": "Emmagatzematge", "Gráficos": "Gràfics", "Fuente": "Font", "Caja": "Caixa", "Sistema operativo": "Sistema operatiu", "Teclado y ratón": "Teclat i ratolí", "Precio": "Preu", "Placa base": "Placa base", "Disipador": "Dissipador", "Referencia": "Referència", "Memoria": "Memòria", "Gráficos y audio": "Gràfics i àudio", "Red": "Xarxa", "Puertos frontales": "Ports frontals", "Puertos traseros": "Ports posteriors", "Seguridad": "Seguretat", "Formato": "Format", "ATX Mars Gaming con 2 ventiladores RGB": "ATX Mars Gaming amb 2 ventiladors RGB", "Formato mini 17,7 × 17,5 × 3,4 cm": "Format mini 17,7 × 17,5 × 3,4 cm", "No incluido": "No inclòs", "Ratón con cable HP 125": "Ratolí amb cable HP 125", "3 años": "3 anys", "Intel (incluido con el procesador)": "Intel (inclòs amb el processador)", "KOORUI Office 22 pulgadas VA FHD 120 Hz Eye Care E2212H": "KOORUI Office 22 polzades VA FHD 120 Hz Eye Care E2212H", "Mars Gaming MC-X2 ATX negra, 2 ventiladores FRGB de 12 cm y ventana lateral completa": "Mars Gaming MC-X2 ATX negra, 2 ventiladors FRGB de 12 cm i finestra lateral completa", "Combo inalámbrico Logitech MK540 Advanced": "Combo sense fils Logitech MK540 Advanced", "Intel Core i7-14700T (14.ª gen.), 20 núcleos, 28 subprocesos, turbo hasta 5 GHz, 33 MB de caché L3": "Intel Core i7-14700T (14.a gen.), 20 nuclis, 28 fils, turbo fins a 5 GHz, 33 MB de memòria cau L3", "Intel Q670 con vPro": "Intel Q670 amb vPro", "16 GB DDR5-4800 (1×16 GB), 2 ranuras DIMM": "16 GB DDR5-4800 (1×16 GB), 2 ranures DIMM", "1 USB-C 20 Gbps, 2 USB-A 10 Gbps (1 de carga), combo auriculares/micrófono": "1 USB-C 20 Gbps, 2 USB-A 10 Gbps (1 de càrrega), combo auriculars/micròfon", "17,7 × 17,5 × 3,4 cm · 1,42 kg · fuente externa de 90 W · negro": "17,7 × 17,5 × 3,4 cm · 1,42 kg · font externa de 90 W · negre", "Mano de obra incluida, 3 años de soporte.": "Mà d'obra inclosa, 3 anys de suport.", "Rellena nombre, correo, teléfono y dirección de envío.": "Omple nom, correu, telèfon i adreça d'enviament.", "Escribe un correo válido, por ejemplo nombre@dominio.com.": "Escriu un correu vàlid, per exemple nom@domini.com.", "La cantidad mínima es 1.": "La quantitat mínima és 1.", "Acepta las condiciones para continuar.": "Accepta les condicions per continuar.", "Copiado": "Copiat", "Selecciona y copia (Ctrl+C)": "Selecciona i copia (Ctrl+C)", "NUEVO PEDIDO": "NOVA COMANDA", "Nombre": "Nom", "Dirección de envío": "Adreça d'enviament", "Observaciones": "Observacions", "Pedido": "Comanda", "Cambiar el idioma a catalán": "Canvia l'idioma a castellà"};
+  Object.assign(CA,{
+    "Abrir asistente":"Obre l'assistent",
+    "Cerrar asistente":"Tanca l'assistent",
+    "Asistente virtual de TechCompany":"Assistent virtual de TechCompany",
+    "Asistente virtual":"Assistent virtual",
+    "En línea":"En línia",
+    "Conversación":"Conversa",
+    "Tu mensaje":"El teu missatge",
+    "Enviar":"Envia",
+    "Escribe tu consulta…":"Escriu la teva consulta…",
+    "Asistente automático. Para casos concretos te atenderá el equipo de TechCompany.":"Assistent automàtic. Per a casos concrets t'atendrà l'equip de TechCompany."
+  });
   function T(s){ return (lang==="ca" && CA[s]!==undefined) ? CA[s] : s; }
 
   var PRODS = {
@@ -526,6 +604,7 @@ footer b{color:var(--yellow);font-family:var(--cond);font-size:18px}
     translateStatic();
     renderDyn();
     setTitle();
+    chatLang();
     if(lang==="ca"){
       $("#lang-label").textContent="Castellano"; btn.setAttribute("lang","es");
       btn.setAttribute("aria-label",CA["Cambiar el idioma a catalán"]);
@@ -536,6 +615,196 @@ footer b{color:var(--yellow);font-family:var(--cond);font-size:18px}
     try{localStorage.setItem(LS_KEY,lang);}catch(e){}
   }
   btn.addEventListener("click",function(){lang=(lang==="ca")?"es":"ca";applyLang();});
+
+  /* ===== Asistente virtual ===== */
+  /* Opcional: URL de un servicio de IA real. Recibe POST {lang, messages:[{role,content}]} y devuelve {reply:"texto"}.
+     Si está vacío (o falla), responde el asistente integrado con la información de esta web. */
+  var AI_ENDPOINT="";
+  var PHONE="676 967 696", MAIL="techcompany@gmail.com";
+  var chatBtn=$("#chat-btn"), chatPanel=$("#chat-panel"), chatLog=$("#chat-log"), chatChips=$("#chat-chips"), chatIn=$("#chat-in");
+  var chatMsgs=[], chatHist=[], chatBusy=false;
+  function LL(o){return typeof o==="string"?o:(o[lang]||o.es);}
+
+  var ACTS={
+    mail:{l:{es:"Escribir al equipo",ca:"Escriure a l'equip"},h:function(q){return "mailto:"+MAIL+"?subject="+encodeURIComponent(lang==="ca"?"Consulta des del web":"Consulta desde la web")+(q?"&body="+encodeURIComponent((lang==="ca"?"La meva consulta: ":"Mi consulta: ")+q):"");}},
+    tel:{l:{es:"Llamar al "+PHONE,ca:"Trucar al "+PHONE},h:function(){return "tel:"+PHONE.replace(/\s/g,"");}},
+    order:{l:{es:"Ir al formulario",ca:"Anar al formulari"},h:function(){return "#pedido";},close:1},
+    catalog:{l:{es:"Ver catálogo",ca:"Veure el catàleg"},h:function(){return "#catalogo";},close:1},
+    compare:{l:{es:"Ver comparador",ca:"Veure el comparador"},h:function(){return "#comparador";},close:1}
+  };
+
+  var CHIPS=[
+    {id:"howorder",es:"¿Cómo hago un pedido?",ca:"Com faig una comanda?"},
+    {id:"status",es:"Estado de mi pedido",ca:"Estat de la meva comanda"},
+    {id:"mailfail",es:"El correo no se abre",ca:"El correu no s'obre"},
+    {id:"warranty",es:"Garantía y averías",ca:"Garantia i avaries"},
+    {id:"contact",es:"Hablar con el equipo",ca:"Parlar amb l'equip"}
+  ];
+
+  var KB={
+    greet:function(){return {
+      es:"¡Hola! Soy el asistente virtual de TechCompany. Te ayudo con pedidos, envíos, garantía y cualquier problema que tengas. ¿Qué necesitas?",
+      ca:"Hola! Sóc l'assistent virtual de TechCompany. T'ajudo amb comandes, enviaments, garantia i qualsevol problema que tinguis. Què necessites?",act:[]};},
+    howorder:function(){return {
+      es:"Hacer un pedido es muy sencillo:\n1. Elige tu equipo en el catálogo y pulsa «Pedir este equipo».\n2. Rellena el formulario: nombre, correo, teléfono, dirección de envío y cantidad.\n3. Acepta las condiciones y pulsa «Enviar pedido por correo». Se abrirá tu programa de correo con el pedido listo para enviar.\nTe responderemos en 24 horas.",
+      ca:"Fer una comanda és molt senzill:\n1. Tria el teu equip al catàleg i prem «Demana aquest equip».\n2. Omple el formulari: nom, correu, telèfon, adreça d'enviament i quantitat.\n3. Accepta les condicions i prem «Enviar la comanda per correu». S'obrirà el teu programa de correu amb la comanda a punt per enviar.\nEt respondrem en 24 hores.",act:["order","catalog"]};},
+    mailfail:function(){return {
+      es:"Si no se ha abierto tu programa de correo, no te preocupes:\n• Pulsa «Abrir correo de nuevo» en el resumen del pedido.\n• O pulsa «Copiar resumen» y envíalo tú mismo a "+MAIL+".\nSi usas Gmail u Outlook en el navegador, puede que tengas que pegar el resumen en un correo nuevo.",
+      ca:"Si no s'ha obert el teu programa de correu, no et preocupis:\n• Prem «Obrir el correu de nou» al resum de la comanda.\n• O prem «Copiar el resum» i envia'l tu mateix a "+MAIL+".\nSi uses Gmail o Outlook al navegador, potser hauràs d'enganxar el resum en un correu nou.",act:["mail"]};},
+    formerr:function(){return {
+      es:"El formulario necesita:\n• Nombre, correo, teléfono y dirección de envío (todos obligatorios).\n• Un correo válido, por ejemplo nombre@dominio.com.\n• Una cantidad de 1 o más.\n• Marcar la casilla de aceptación de las condiciones.\nSi sigues sin poder enviarlo, cuéntanos qué mensaje te sale o escríbenos y lo gestionamos a mano.",
+      ca:"El formulari necessita:\n• Nom, correu, telèfon i adreça d'enviament (tots obligatoris).\n• Un correu vàlid, per exemple nom@domini.com.\n• Una quantitat d'1 o més.\n• Marcar la casella d'acceptació de les condicions.\nSi continues sense poder enviar-lo, explica'ns quin missatge et surt o escriu-nos i ho gestionem a mà.",act:["order","mail"]};},
+    status:function(){return {
+      es:"Esta web no tiene un panel de seguimiento automático. Una vez enviado tu pedido, te respondemos por correo en 24 horas y te confirmamos el plazo de entrega por correo o teléfono. Si ya hiciste el pedido y quieres saber cómo va, escríbenos indicando tu nombre y el equipo que pediste.",
+      ca:"Aquest web no té un tauler de seguiment automàtic. Un cop enviada la teva comanda, et responem per correu en 24 hores i et confirmem el termini de lliurament per correu o telèfon. Si ja has fet la comanda i vols saber com va, escriu-nos indicant el teu nom i l'equip de la comanda.",act:["mail","tel"]};},
+    shiptime:function(){return {
+      es:"El plazo de entrega te lo confirmamos por correo o teléfono al recibir tu pedido, y respondemos en 24 horas. Si crees que tu pedido se retrasa, escríbenos con tu nombre y el equipo y lo revisamos.",
+      ca:"El termini de lliurament te'l confirmem per correu o telèfon en rebre la teva comanda, i responem en 24 hores. Si creus que la teva comanda es retarda, escriu-nos amb el teu nom i l'equip i ho revisem.",act:["mail"]};},
+    shipcost:function(){return {
+      es:"En las opciones A y B el envío ya está incluido en el precio final ("+eur(PRODS.A.price)+" y "+eur(PRODS.B.price)+"). La opción C ("+eur(PRODS.C.price)+") se vende con IVA incluido; si quieres saber sus gastos de envío, escríbenos y te lo confirmamos.",
+      ca:"A les opcions A i B l'enviament ja està inclòs en el preu final ("+eur(PRODS.A.price)+" i "+eur(PRODS.B.price)+"). L'opció C ("+eur(PRODS.C.price)+") es ven amb l'IVA inclòs; si vols saber-ne les despeses d'enviament, escriu-nos i te les confirmem.",act:["mail"]};},
+    warranty:function(){return {
+      es:"Todos los equipos incluyen 3 años de garantía y soporte. Si tienes un problema, antes de nada prueba esto:\n• Comprueba que el cable de corriente está bien conectado y, si tu equipo tiene interruptor en la fuente, que esté en «I».\n• Verifica que el monitor está encendido y conectado al PC (HDMI o DisplayPort).\n• Prueba con otro cable o enchufe.\nSi el problema continúa, llámanos o escríbenos indicando tu equipo (A, B o C) y qué ocurre, y lo gestionamos.",
+      ca:"Tots els equips inclouen 3 anys de garantia i suport. Si tens un problema, abans de res prova això:\n• Comprova que el cable de corrent està ben connectat i, si el teu equip té interruptor a la font, que estigui a «I».\n• Verifica que el monitor està encès i connectat al PC (HDMI o DisplayPort).\n• Prova amb un altre cable o endoll.\nSi el problema continua, truca'ns o escriu-nos indicant el teu equip (A, B o C) i què passa, i ho gestionem.",act:["mail","tel"]};},
+    change:function(){return {
+      es:"Sí, puedes pedir cambios. Indícalo en el campo «Observaciones» del pedido (por ejemplo, más RAM o más almacenamiento) y te enviamos un presupuesto ajustado.",
+      ca:"Sí, es poden fer canvis. Indica'ls al camp «Observacions» de la comanda (per exemple, més RAM o més emmagatzematge) i t'enviem un pressupost ajustat.",act:["order"]};},
+    price:function(){return {
+      es:"Precios con IVA incluido:\n• A · Low Cost: "+eur(PRODS.A.price)+"\n• B · Precio normal: "+eur(PRODS.B.price)+"\n• C · Pre-Build: "+eur(PRODS.C.price)+"\nTodos incluyen mano de obra y Windows 11 instalado, y en A y B el envío también está incluido.",
+      ca:"Preus amb l'IVA inclòs:\n• A · Low Cost: "+eur(PRODS.A.price)+"\n• B · Preu normal: "+eur(PRODS.B.price)+"\n• C · Pre-Build: "+eur(PRODS.C.price)+"\nTots inclouen mà d'obra i Windows 11 instal·lat, i a A i B l'enviament també està inclòs.",act:["catalog"]};},
+    recommend:function(){return {
+      es:"Te lo resumo:\n• A · Low Cost: Core i3, 16 GB de RAM, SSD de 250 GB. Ideal para ofimática y el día a día.\n• B · Normal: Core i5, 16 GB de RAM, SSD de 512 GB. Más potencia y más espacio.\n• C · HP Pro Mini: Core i7, DDR5, formato muy compacto y seguridad profesional (vPro). No incluye monitor.\nSi me cuentas para qué lo vas a usar, te oriento mejor.",
+      ca:"T'ho resumeixo:\n• A · Low Cost: Core i3, 16 GB de RAM, SSD de 250 GB. Ideal per a ofimàtica i el dia a dia.\n• B · Normal: Core i5, 16 GB de RAM, SSD de 512 GB. Més potència i més espai.\n• C · HP Pro Mini: Core i7, DDR5, format molt compacte i seguretat professional (vPro). No inclou monitor.\nSi m'expliques per a què l'utilitzaràs, t'orientaré millor.",act:["compare"]};},
+    includes:function(){return {
+      es:"Todos los equipos incluyen montaje, Windows 11 instalado y 3 años de garantía y soporte. En las opciones A y B también van incluidos monitor, teclado y ratón, y el envío. La opción C (HP Pro Mini) no incluye monitor; en el comparador tienes el detalle.",
+      ca:"Tots els equips inclouen muntatge, Windows 11 instal·lat i 3 anys de garantia i suport. A les opcions A i B també van inclosos monitor, teclat i ratolí, i l'enviament. L'opció C (HP Pro Mini) no inclou monitor; al comparador en tens el detall.",act:["compare"]};},
+    contact:function(){return {
+      es:"Puedes contactar con nosotros por teléfono en el "+PHONE+" o por correo en "+MAIL+". Respondemos en 24 horas.",
+      ca:"Pots contactar amb nosaltres per telèfon al "+PHONE+" o per correu a "+MAIL+". Responem en 24 hores.",act:["tel","mail"]};},
+    policy:function(){return {
+      es:"Esa información la gestiona directamente el equipo de TechCompany al confirmar tu pedido y no la tengo disponible aquí. Escríbenos o llámanos con tu consulta y te respondemos en 24 horas.",
+      ca:"Aquesta informació la gestiona directament l'equip de TechCompany en confirmar la teva comanda i no la tinc disponible aquí. Escriu-nos o truca'ns amb la teva consulta i et responem en 24 hores.",act:["mail","tel"]};},
+    thanks:function(){return {
+      es:"¡De nada! Si necesitas algo más, aquí estoy.",
+      ca:"De res! Si necessites alguna cosa més, aquí em tens.",act:[]};},
+    fallback:function(){return {
+      es:"No estoy seguro de haber entendido tu consulta. Puedo ayudarte con pedidos, envíos, precios, garantía o averías. También puedes hablar directamente con el equipo.",
+      ca:"No estic segur d'haver entès la teva consulta. Et puc ajudar amb comandes, enviaments, preus, garantia o avaries. També pots parlar directament amb l'equip.",act:["mail","tel"]};}
+  };
+
+  /*INTENTS-START*/
+  var INTENTS=[
+    ["greet",["hola","buenas","buenos dias","bon dia","bona tarda","hello"]],
+    ["thanks",["gracias","gracies","adios","adeu","hasta luego","fins aviat"]],
+    ["mailfail",["no se abre","no abre","no se ha abierto","programa de correo","mailto","no puedo enviar","no se envia","abrir correo","copiar resumen","no s'obre","no s'ha obert","no puc enviar","no s'envia","obrir el correu","copiar el resum","correo no","correu no","gmail","outlook"]],
+    ["formerr",["error","no me deja","no deja","formulario no","formulari no","no puedo","no puc","falla","obligatorio","obligatori","campo","camp ","no deixa","casilla","casella"]],
+    ["status",["estado","seguimiento","rastrear","rastreo","donde esta mi","mi pedido","no ha llegado","no me ha llegado","no llega","sin llegar","tracking","estat","seguiment","la meva comanda","no ha arribat","no m'ha arribat","on es la meva","he hecho un pedido","he fet una comanda","retraso","retard","tarda mucho","triga molt"]],
+    ["shiptime",["plazo","cuanto tarda","cuando llega","entrega","tiempo de envio","termini","quant tarda","quan arriba","lliurament","dias de envio","dies d'enviament"]],
+    ["shipcost",["gastos de envio","cuesta el envio","coste de envio","costes de envio","envio incluido","envio gratis","portes","enviament inclos","despeses d'enviament","cost d'enviament","costa l'enviament","enviament gratis","envio","enviament"]],
+    ["warranty",["garantia","averia","averias","avaria","avaries","se ha roto","esta roto","trencat","no enciende","no arranca","no s'encen","no arrenca","pantalla negra","pantalla en negre","se apaga","s'apaga","reparar","reparacio","reparacion","soporte","suport","problema con mi","problema amb el meu","mi pc","el meu pc","mi ordenador","el meu ordinador","no funciona","no va be","ruido","soroll","va lento","va lent","no inicia","no s'inicia","se queda colgado","es penja","se cuelga","virus","fallo","fallos"]],
+    ["change",["cambiar","modificar","personalizar","a medida","mas ram","mas memoria","ampliar","otro procesador","mas almacenamiento","otro componente","canviar","personalitzar","a mida","mes ram","mes memoria","un altre processador","mes emmagatzematge","un altre component","componente","configurar"]],
+    ["policy",["cancelar mi pedido","cancelar el pedido","cancelar la comanda","cancel lar","cancelar","cancel","devolver","devolucion","reembolso","factura","pago","pagar","tarjeta","transferencia","tornar","devolucio","retornar","pagament","paypal","bizum","descuento","descompte","cambiar la direccion","cambiar direccion","canviar l'adreca","canviar adreca","modificar mi pedido","modificar el pedido","modificar la comanda"]],
+    ["price",["precio","precios","cuanto cuesta","cuanto vale","cuanto es"," iva ","preu","preus","quant costa","quant val","cuesta","presupuesto","pressupost"]],
+    ["recommend",["diferencia","cual elijo","cual me recomiendas","cual elegir","que equipo","que pc","mejor equipo","comparar","comparativa","recomend","quin em recomanes","quin triar","quin equip","quin pc","millor equip","jugar","gaming","videojuegos","videojocs","oficina","trabajar","treballar","estudiar","diseno","disseny","programar","opcion a","opcion b","opcion c","opcio a","opcio b","opcio c"]],
+    ["includes",["incluye","incluido","incluida","inclou","inclos","inclosa","monitor","teclado","raton","teclat","ratoli","windows","instalado","que lleva","que porta","viene con","ve amb"]],
+    ["contact",["telefono","llamar","llamada","email","correo electronico","contacto","contactar","hablar con","una persona","un humano","agente","operador","atencion al cliente","telefon","trucar","trucada","contacte","correu electronic","parlar amb","atencio al client","whatsapp","horario","horari"]],
+    ["howorder",["como hago","como pedir","como compro","como comprar","hacer un pedido","hacer pedido","realizar un pedido","fer una comanda","fes comanda","fer comanda","com faig","com puc comprar","com compro","com demano","formulario","formulari","comprar","pedir","demanar","demana","encargar","comanda","pedido"]]
+  ];
+  function norm(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[’`´]/g,"'").replace(/[^a-z0-9']+/g," ");}
+  function detect(text){
+    var t=" "+norm(text)+" ", best=null, bs=0;
+    INTENTS.forEach(function(it){
+      var sc=0;
+      it[1].forEach(function(k){ if(t.indexOf(k)>=0) sc+=k.trim().split(/\s+/).length; });
+      if(sc>bs){bs=sc;best=it[0];}
+    });
+    return best||"fallback";
+  }
+  /*INTENTS-END*/
+
+  function askAI(){
+    if(!AI_ENDPOINT)return Promise.resolve(null);
+    return fetch(AI_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({lang:lang,messages:chatHist.slice(-12)})})
+      .then(function(r){return r.json();})
+      .then(function(j){return (j&&j.reply)?String(j.reply):null;})
+      .catch(function(){return null;});
+  }
+
+  function renderChat(){
+    chatLog.innerHTML="";
+    chatMsgs.forEach(function(m){
+      var row=document.createElement("div"); row.className="msg "+m.who;
+      var b=document.createElement("div"); b.className="bub"; b.textContent=LL(m.t); row.appendChild(b);
+      if(m.act&&m.act.length){
+        var ac=document.createElement("div"); ac.className="acts";
+        m.act.forEach(function(k){
+          var A=ACTS[k], a=document.createElement("a");
+          a.className="chat-act"; a.textContent=LL(A.l); a.href=A.h(m.q);
+          if(A.close)a.setAttribute("data-close","1");
+          ac.appendChild(a);
+        });
+        row.appendChild(ac);
+      }
+      chatLog.appendChild(row);
+    });
+    if(chatBusy){
+      var tr=document.createElement("div"); tr.className="msg bot";
+      tr.innerHTML='<div class="bub typing" aria-hidden="true"><span></span><span></span><span></span></div>';
+      chatLog.appendChild(tr);
+    }
+    chatLog.scrollTop=chatLog.scrollHeight;
+  }
+  function renderChips(){
+    chatChips.innerHTML="";
+    CHIPS.forEach(function(c){
+      var b=document.createElement("button"); b.type="button"; b.dataset.intent=c.id; b.textContent=LL(c); chatChips.appendChild(b);
+    });
+  }
+  function botSay(r,q){
+    chatMsgs.push({who:"bot",t:{es:r.es,ca:r.ca},act:r.act||[],q:q||""});
+    chatHist.push({role:"assistant",content:r.es});
+  }
+  function userSay(text,intent){
+    text=(text||"").trim();
+    if(!text||chatBusy)return;
+    chatMsgs.push({who:"me",t:text});
+    chatHist.push({role:"user",content:text});
+    chatBusy=true; renderChat();
+    var t0=Date.now();
+    askAI().then(function(ai){
+      var r=ai?{es:ai,ca:ai,act:[]}:KB[intent||detect(text)]();
+      setTimeout(function(){
+        chatBusy=false; botSay(r,text); renderChat();
+      },Math.max(0,650-(Date.now()-t0)));
+    });
+  }
+  function openChat(){
+    chatPanel.hidden=false; chatBtn.setAttribute("aria-expanded","true");
+    var dot=chatBtn.querySelector(".dot"); if(dot)dot.remove();
+    chatLog.scrollTop=chatLog.scrollHeight;
+    setTimeout(function(){chatIn.focus();},40);
+  }
+  function closeChat(ret){
+    chatPanel.hidden=true; chatBtn.setAttribute("aria-expanded","false");
+    if(ret)chatBtn.focus();
+  }
+  function chatLang(){
+    chatIn.placeholder=T("Escribe tu consulta…");
+    renderChat(); renderChips();
+  }
+  chatBtn.addEventListener("click",function(){ if(chatPanel.hidden)openChat(); else closeChat(true); });
+  $("#chat-x").addEventListener("click",function(){closeChat(true);});
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&!chatPanel.hidden)closeChat(true); });
+  chatPanel.addEventListener("click",function(e){ if(e.target.closest("a[data-close]"))closeChat(false); });
+  $("#chat-form").addEventListener("submit",function(e){ e.preventDefault(); var v=chatIn.value; chatIn.value=""; userSay(v); });
+  chatChips.addEventListener("click",function(e){
+    var b=e.target.closest("button[data-intent]");
+    if(b){
+      var c=CHIPS.filter(function(x){return x.id===b.dataset.intent;})[0];
+      userSay(LL(c),c.id);
+    }
+  });
+  botSay(KB.greet(),"");
 
   route();
   applyLang();
