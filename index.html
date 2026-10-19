@@ -300,6 +300,26 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
 @media (prefers-reduced-motion:reduce){.spin-fab,.spin-panel{animation:none!important}}
 .row[hidden]{display:none}.promo-msg{margin:4px 0 0;font-weight:600;font-size:15px;min-height:1.2em}.promo-msg.ok{color:#2ea043}.promo-msg.bad{color:var(--red)}
 .spin-copy{font:inherit;font-size:13px;font-weight:700;margin-left:6px;padding:3px 10px;border:2px solid var(--ink);border-radius:6px;background:var(--bg);color:var(--text);cursor:pointer}.spin-copy:hover{background:var(--yellow);color:var(--ink)}
+
+/* ===== método de pago ===== */
+.pay{border:0;padding:0;margin:0;min-width:0}
+.pay legend{font-family:var(--cond);font-weight:700;font-size:19px;padding:0;margin-bottom:6px}
+.pay-hint{margin:0 0 10px;font-size:15px;color:var(--muted)}
+.pay-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.pay-opt{position:relative;display:block;margin:0;font-weight:400;cursor:pointer}
+.pay-opt input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.pay-box{position:relative;display:flex;flex-direction:column;gap:2px;height:100%;padding:12px 12px 12px 12px;border:2px solid var(--ink);border-radius:6px;background:var(--bg);color:var(--text);transition:background .18s,transform .18s,box-shadow .18s}
+.pay-box svg{width:34px;height:34px;margin-bottom:6px;color:var(--red);transition:transform .25s}
+.pay-box b{font-family:var(--cond);font-weight:700;font-size:18px;line-height:1.15}
+.pay-box small{font-family:var(--body);font-size:13.5px;line-height:1.3;color:var(--muted)}
+.pay-opt:hover .pay-box{transform:translateY(-2px);box-shadow:0 4px 0 var(--ink)}
+.pay-opt input:checked + .pay-box{background:var(--yellow);color:var(--ink);box-shadow:inset 0 0 0 3px var(--ink)}
+.pay-opt input:checked + .pay-box small{color:#3b3b3b}
+.pay-opt input:checked + .pay-box svg{color:var(--ink);animation:pay-pop .35s ease-out}
+.pay-opt input:checked + .pay-box::after{content:"";position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3.2L15 7' fill='none' stroke='%23FFDD00' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+.pay-opt input:focus-visible + .pay-box{outline:3px solid var(--red);outline-offset:2px}
+@keyframes pay-pop{0%{transform:scale(.7) rotate(-8deg)}60%{transform:scale(1.15)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){.pay-box,.pay-box svg{transition:none}.pay-opt input:checked + .pay-box svg{animation:none}.pay-opt:hover .pay-box{transform:none}}
 </style>
 </head>
 <body>
@@ -452,6 +472,18 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
             <div><label for="dir">Dirección de envío completa</label><textarea id="dir" rows="3" autocomplete="street-address" required></textarea></div>
             <div><label for="obs">Observaciones (opcional)</label><textarea id="obs" rows="2"></textarea></div>
             <div><label for="promo">Código promocional (opcional)</label><input id="promo" autocomplete="off" autocapitalize="characters" placeholder="TECH5-XXXX" maxlength="20"><p class="promo-msg" id="promo-msg" data-dyn role="status"></p></div>
+            <fieldset class="pay" id="pay">
+              <legend>Método de pago</legend>
+              <p class="pay-hint">Elige cómo prefieres pagar. No se cobra nada al enviar el formulario: te confirmaremos los detalles del pago por correo o teléfono.</p>
+              <div class="pay-grid">
+                <label class="pay-opt"><input type="radio" name="pago" value="card"><span class="pay-box"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="26" height="18" rx="3"/><path d="M3 12.5h26M7 20h6"/></svg><b>Tarjeta de crédito o débito</b><small>Visa, Mastercard…</small></span></label>
+                <label class="pay-opt"><input type="radio" name="pago" value="paypal"><span class="pay-box"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9a3 3 0 0 1 3-3h15v4"/><rect x="4" y="9" width="24" height="17" rx="3"/><path d="M28 15h-6a3 3 0 0 0 0 6h6"/><circle cx="22.5" cy="18" r=".8" fill="currentColor"/></svg><b>PayPal</b><small>Cuenta PayPal</small></span></label>
+                <label class="pay-opt"><input type="radio" name="pago" value="bizum"><span class="pay-box"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="3"/><path d="M14 25h4"/><circle cx="16" cy="14" r="4.5"/><path d="M17.8 12.4a2.4 2.4 0 1 0 0 3.2M13.8 14h3"/></svg><b>Bizum</b><small>Pago desde el móvil</small></span></label>
+                <label class="pay-opt"><input type="radio" name="pago" value="wallet"><span class="pay-box"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="22" height="14" rx="3"/><path d="M16 12.5c1.7 1.6 1.7 5.4 0 7M19.5 11c2.7 2.4 2.7 7.6 0 10M12.5 14c.9 1 .9 3 0 4"/></svg><b>Apple Pay / Google Pay</b><small>Pago sin contacto</small></span></label>
+                <label class="pay-opt"><input type="radio" name="pago" value="transfer"><span class="pay-box"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12 16 4l13 8z"/><path d="M6 14v9M12 14v9M20 14v9M26 14v9M4 27h24"/></svg><b>Transferencia bancaria</b><small>Desde tu banco</small></span></label>
+                <label class="pay-opt"><input type="radio" name="pago" value="cod"><span class="pay-box"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10 16 4l12 6v12l-12 6-12-6z"/><path d="M4 10l12 6 12-6M16 16v12"/><path d="M10 7l12 6" /></svg><b>Contra reembolso</b><small>Pago al recibir el equipo</small></span></label>
+              </div>
+            </fieldset>
             <div class="check"><input type="checkbox" id="ok"><label for="ok">Acepto las condiciones de compra y el tratamiento de mis datos para gestionar el pedido.</label></div>
             <p class="err" id="err" data-dyn role="alert"></p>
             <button class="btn dark" type="submit">Enviar pedido por correo</button>
@@ -473,6 +505,7 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
             <div class="row"><dt>Precio unidad</dt><dd id="s-pu" style="margin:0">—</dd></div>
             <div class="row"><dt>Cantidad</dt><dd id="s-q" style="margin:0">1</dd></div>
             <div class="row" id="s-dr" hidden><dt>Descuento</dt><dd id="s-d" style="margin:0">—</dd></div>
+            <div class="row" id="s-pr"><dt>Pago</dt><dd id="s-p" data-dyn style="margin:0;text-align:right">—</dd></div>
             <div class="row t"><dt>Total</dt><dd id="s-t" style="margin:0">—</dd></div>
           </dl>
           <small id="s-note" data-dyn></small>
@@ -612,6 +645,7 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
   Object.assign(CA,{"Ofertas y novedades": "Ofertes i novetats", "Suscríbete y te avisamos de promociones y nuevos equipos. Puedes darte de baja cuando quieras.": "Subscriu-te i t’avisem de promocions i nous equips. Pots donar-te de baixa quan vulguis.", "Acepto recibir correos con ofertas y novedades de TechCompany.": "Accepto rebre correus amb ofertes i novetats de TechCompany.", "Suscribirme": "Subscriure’m", "Introduce un correo electrónico válido.": "Introdueix un correu electrònic vàlid.", "Acepta recibir los correos para suscribirte.": "Accepta rebre els correus per subscriure’t.", "Se ha abierto tu programa de correo. Envía el mensaje para completar la suscripción.": "S’ha obert el teu programa de correu. Envia el missatge per completar la subscripció."}); Object.assign(EN,{"Ofertas y novedades": "Offers and news", "Suscríbete y te avisamos de promociones y nuevos equipos. Puedes darte de baja cuando quieras.": "Subscribe and we’ll let you know about promotions and new PCs. You can unsubscribe at any time.", "Acepto recibir correos con ofertas y novedades de TechCompany.": "I agree to receive emails with offers and news from TechCompany.", "Suscribirme": "Subscribe me", "Introduce un correo electrónico válido.": "Enter a valid email address.", "Acepta recibir los correos para suscribirte.": "Accept receiving the emails to subscribe.", "Se ha abierto tu programa de correo. Envía el mensaje para completar la suscripción.": "Your email app has opened. Send the message to complete your subscription."});
   Object.assign(CA,{"Envío incluido en los equipos A y B": "Enviament inclòs als equips A i B", "Esta web solo guarda en tu navegador tu idioma, tema y opiniones. No usamos cookies de seguimiento ni publicidad.": "Aquest web només desa al teu navegador l’idioma, el tema i les opinions. No fem servir galetes de seguiment ni publicitat.", "Entendido": "Entesos", "Cerrar": "Tancar", "Anterior": "Anterior", "Siguiente": "Següent", "Galería": "Galeria", "Pulsa la imagen para ampliarla": "Prem la imatge per ampliar-la"}); Object.assign(EN,{"Envío incluido en los equipos A y B": "Shipping included on PCs A and B", "Esta web solo guarda en tu navegador tu idioma, tema y opiniones. No usamos cookies de seguimiento ni publicidad.": "This site only stores your language, theme and reviews in your browser. We don’t use tracking or advertising cookies.", "Entendido": "Got it", "Cerrar": "Close", "Anterior": "Previous", "Siguiente": "Next", "Galería": "Gallery", "Pulsa la imagen para ampliarla": "Click the image to zoom"});
   Object.assign(CA,{"¿Qué PC es el tuyo?": "Quin PC és el teu?", "Responde 5 preguntas rápidas y te recomendamos el equipo que mejor encaja contigo.": "Respon 5 preguntes ràpides i et recomanem l’equip que millor encaixa amb tu."}); Object.assign(EN,{"¿Qué PC es el tuyo?": "Which PC is right for you?", "Responde 5 preguntas rápidas y te recomendamos el equipo que mejor encaja contigo.": "Answer 5 quick questions and we’ll recommend the PC that fits you best."});
+  Object.assign(CA,{"Método de pago": "Mètode de pagament", "Elige cómo prefieres pagar. No se cobra nada al enviar el formulario: te confirmaremos los detalles del pago por correo o teléfono.": "Tria com prefereixes pagar. No es cobra res en enviar el formulari: et confirmarem els detalls del pagament per correu o telèfon.", "Tarjeta de crédito o débito": "Targeta de crèdit o dèbit", "Cuenta PayPal": "Compte PayPal", "Pago desde el móvil": "Pagament des del mòbil", "Pago sin contacto": "Pagament sense contacte", "Transferencia bancaria": "Transferència bancària", "Desde tu banco": "Des del teu banc", "Contra reembolso": "Contra reemborsament", "Pago al recibir el equipo": "Pagament en rebre l'equip", "Pago": "Pagament", "Elige un método de pago.": "Tria un mètode de pagament."}); Object.assign(EN,{"Método de pago": "Payment method", "Elige cómo prefieres pagar. No se cobra nada al enviar el formulario: te confirmaremos los detalles del pago por correo o teléfono.": "Choose how you prefer to pay. Nothing is charged when you send the form: we will confirm the payment details by email or phone.", "Tarjeta de crédito o débito": "Credit or debit card", "Cuenta PayPal": "PayPal account", "Pago desde el móvil": "Pay from your phone", "Pago sin contacto": "Contactless payment", "Transferencia bancaria": "Bank transfer", "Desde tu banco": "From your bank", "Contra reembolso": "Cash on delivery", "Pago al recibir el equipo": "Pay when you receive it", "Pago": "Payment", "Elige un método de pago.": "Please choose a payment method."});
   function T(s){ var d=DICT[lang]; return (d && d[s]!==undefined) ? d[s] : s; }
 
   var PRODS = {
@@ -744,19 +778,23 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
     buildOrder(false);
   }
 
+  var PAYN={card:"Tarjeta de crédito o débito",paypal:"PayPal",bizum:"Bizum",wallet:"Apple Pay / Google Pay",transfer:"Transferencia bancaria",cod:"Contra reembolso"};
+  function payVal(){var c=document.querySelector('#order input[name="pago"]:checked');return c?c.value:"";}
   function upd(){
     var p=PRODS[sel.value], q=Math.max(1,parseInt($("#cant").value,10)||1);
     $("#s-eq").textContent=T(p.name); $("#s-pu").textContent=eur(p.price);
     $("#s-q").textContent=q; var dc=discount(p,q); $("#s-dr").hidden=!dc; $("#s-d").textContent="−"+eur(dc); $("#s-t").textContent=eur(p.price*q-dc);
     $("#s-note").textContent=T(p.note)+". "+T("Mano de obra incluida, 3 años de soporte.");
+    var pv=payVal(); $("#s-p").textContent=pv?T(PAYN[pv]):"—";
   }
+  document.querySelectorAll('#order input[name="pago"]').forEach(function(r){r.addEventListener("change",function(){upd();if(errKey==="Elige un método de pago.")setErr("");});});
   sel.addEventListener("change",upd); $("#cant").addEventListener("input",upd);
 
   /* ===== Pedido ===== */
   function buildOrder(){
     if(!lastOrder)return;
     var p=PRODS[lastOrder.p], q=lastOrder.q, f=lastOrder.f;
-    lastBody=T("NUEVO PEDIDO")+"\n\n"+T("Equipo")+": "+T(p.tag)+" ("+T(p.name)+")\n"+T("Cantidad")+": "+q+"\n"+T("Precio unidad")+": "+eur(p.price)+"\n"+T("Total")+": "+eur(p.price*q)+promoLine(p,q)+
+    lastBody=T("NUEVO PEDIDO")+"\n\n"+T("Equipo")+": "+T(p.tag)+" ("+T(p.name)+")\n"+T("Cantidad")+": "+q+"\n"+T("Precio unidad")+": "+eur(p.price)+"\n"+T("Total")+": "+eur(p.price*q)+promoLine(p,q)+"\n"+T("Método de pago")+": "+T(PAYN[lastOrder.pay])+
       "\n\n"+T("Nombre")+": "+f.nombre+"\n"+T("Correo")+": "+f.email+"\n"+T("Teléfono")+": "+f.tel+"\n"+T("Dirección de envío")+": "+f.dir+"\n"+T("Observaciones")+": "+(f.obs||"—");
     lastHref="mailto:techcompany@gmail.com?subject="+encodeURIComponent(T("Pedido")+" "+T(p.tag)+" x"+q)+"&body="+encodeURIComponent(lastBody);
     $("#done-text").textContent=lastBody;
@@ -771,9 +809,10 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
     if(!f.nombre||!f.email||!f.tel||!f.dir){setErr("Rellena nombre, correo, teléfono y dirección de envío.");return;}
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email)){setErr("Escribe un correo válido, por ejemplo nombre@dominio.com.");return;}
     if(!q||q<1){setErr("La cantidad mínima es 1.");return;}
+    if(!payVal()){setErr("Elige un método de pago.");var pf=document.querySelector('#order input[name="pago"]');if(pf)pf.focus();return;}
     if(!$("#ok").checked){setErr("Acepta las condiciones para continuar.");return;}
     setErr("");
-    lastOrder={p:sel.value,q:q,f:f,promo:promoOn};
+    lastOrder={p:sel.value,q:q,f:f,promo:promoOn,pay:payVal()};
     buildOrder();
     $("#done").classList.add("show");
     $("#done").scrollIntoView({behavior:"smooth",block:"nearest"});
