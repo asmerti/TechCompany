@@ -210,7 +210,7 @@ footer b{color:var(--yellow);font-family:var(--cond);font-size:18px}
 @keyframes page-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 @keyframes page-out{to{opacity:0;transform:translateY(-12px)}}
 @keyframes rise{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
-.page.active :is(.grid3,.contact,#specs,#rev-root,.faq)>*,.page.active .tablewrap,.page.active .formgrid>*{animation:rise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*90ms)}
+.page.active :is(.grid3,.contact,#specs,#rev-root,.faq)>*:not([data-sr]),.page.active .tablewrap,.page.active .formgrid>*:not([data-sr]){animation:rise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*90ms)}
 :is(.grid3,.contact,#specs,#rev-root,.faq)>:nth-child(2){--i:1}:is(.grid3,.contact,#specs,#rev-root,.faq)>:nth-child(3){--i:2}:is(.grid3,.contact,#specs,#rev-root,.faq)>:nth-child(4){--i:3}
 .page.active .hero h1,.page.active .hero .lead,.page.active .hero .btns{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
 .page.active .hero .lead{animation-delay:.1s}.page.active .hero .btns{animation-delay:.2s}
@@ -320,9 +320,27 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
 .pay-opt input:focus-visible + .pay-box{outline:3px solid var(--red);outline-offset:2px}
 @keyframes pay-pop{0%{transform:scale(.7) rotate(-8deg)}60%{transform:scale(1.15)}100%{transform:none}}
 @media (prefers-reduced-motion:reduce){.pay-box,.pay-box svg{transition:none}.pay-opt input:checked + .pay-box svg{animation:none}.pay-opt:hover .pay-box{transform:none}}
+
+/* ===== animaciones al hacer scroll ===== */
+.sprog{position:fixed;top:0;left:0;right:0;height:4px;z-index:70;background:linear-gradient(90deg,var(--red),var(--yellow));transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+.topbar{transition:box-shadow .3s}.topbar.scrolled{box-shadow:0 8px 22px rgba(0,0,0,.4)}
+[data-sr].sr-h,[data-sr].sr-s{transition:opacity .75s ease var(--d,0ms),transform .85s cubic-bezier(.2,.7,.2,1) var(--d,0ms),background-size .8s ease calc(var(--d,0ms) + .25s)}
+[data-sr].sr-h{opacity:0;transform:translate3d(var(--x,0px),var(--y,36px),0) scale(var(--s,1))}
+[data-sr="left"]{--x:-56px;--y:0px}
+[data-sr="right"]{--x:56px;--y:0px}
+[data-sr="pop"]{--y:34px;--s:.92}
+[data-sr="fade"]{--y:12px}
+.sec-title{padding-bottom:10px;background:linear-gradient(var(--yellow),var(--yellow)) 0 100%/96px 6px no-repeat}
+.sec-title.sr-h{background-size:0 6px}
+.card .pic img{transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.card.sr-h .pic img{transform:scale(1.22)}
+.hero .wrap>div:first-child{translate:0 min(calc(var(--sy,0)*.18px),60px)}
+.hero .price-burst{translate:0 calc(var(--sy,0)*-.1px)}
+@media (prefers-reduced-motion:reduce){[data-sr]{transition:none!important;opacity:1!important;transform:none!important}.hero .wrap>div:first-child,.hero .price-burst{translate:none}.sprog{transition:none}}
 </style>
 </head>
 <body>
+<div class="sprog" id="sprog" aria-hidden="true"></div>
 
 <div class="promo" id="promo"><span>Envío incluido en los equipos A y B</span><b id="promo-t" data-dyn></b><button type="button" class="promo-x" id="promo-x" aria-label="Cerrar">×</button></div>
 <header class="topbar">
@@ -776,6 +794,7 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
     var rc=$("#rv-eq").value||"A"; $("#rv-eq").innerHTML=sel.innerHTML; $("#rv-eq").value=rc;
     renderRev(); renderQuiz(); paintRate(); $("#rv-err").textContent=rvErr?T(rvErr):""; $("#rv-ok").textContent=rvOk?T(rvOk):"";
     buildOrder(false);
+    if(srLive)srScan(true);
   }
 
   var PAYN={card:"Tarjeta de crédito o débito",paypal:"PayPal",bizum:"Bizum",wallet:"Apple Pay / Google Pay",transfer:"Transferencia bancaria",cod:"Contra reembolso"};
@@ -832,6 +851,7 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
   function setTitle(){
     document.title=(TITLES[current]?T(TITLES[current])+" · ":"")+T("TechCompany · PC de oficina montado a piezas");
   }
+  function onScrollSafe(){try{window.dispatchEvent(new Event("scroll"));}catch(e){}}
   var rtok=0, RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
   function route(first){
     var h=(location.hash||"#inicio").replace("#","");
@@ -842,7 +862,7 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
     function show(){
       if(tok!==rtok)return;
       PAGES.forEach(function(p){var el=$("#p-"+p);el.classList.remove("leaving");el.classList.toggle("active",p===h);});
-      setTitle(); window.scrollTo(0,0);
+      setTitle(); window.scrollTo(0,0); if(srLive)srArm($("#p-"+h)); onScrollSafe();
       if(h==="opiniones"&&rvFocus){var t=$("#rev-"+rvFocus);rvFocus=null;if(t)setTimeout(function(){t.scrollIntoView({behavior:"smooth",block:"start"});},350);}
     }
     if(prev&&prev.id!=="p-"+h&&first!==true&&!RM){prev.classList.add("leaving");setTimeout(show,180);}else show();
@@ -853,6 +873,61 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
     var rv=e.target.closest("[data-rv]"); rvFocus=rv?rv.dataset.rv:null;
   });
   window.addEventListener("hashchange",function(){route();});
+
+
+  /* ===== Animaciones al hacer scroll ===== */
+  var srIO=null, srLive=false;
+  function srTag(el,v,i){
+    if(!el||el.hasAttribute("data-sr")||el.closest(".hero"))return false;
+    el.setAttribute("data-sr",v||"up"); el.style.setProperty("--d",Math.min(i||0,5)*90+"ms"); return true;
+  }
+  function srScan(instant){
+    if(RM)return;
+    var fresh=[];
+    function T2(el,v,i){ if(srTag(el,v,i))fresh.push(el); }
+    document.querySelectorAll(".sec-title").forEach(function(e){T2(e,"left",0);});
+    document.querySelectorAll(".ventajas li").forEach(function(e,i){T2(e,"left",i);});
+    document.querySelectorAll("section.block .wrap").forEach(function(w){
+      Array.prototype.forEach.call(w.children,function(c){
+        if(c.classList.contains("sec-title")||c.tagName==="SCRIPT")return;
+        if(c.matches(".grid3,.contact,.faq,#specs")) Array.prototype.forEach.call(c.children,function(k,i){T2(k,"pop",i%3);});
+        else if(c.matches(".formgrid")){T2(c.children[0],"left",0);T2(c.children[1],"right",1);}
+        else if(c.classList.contains("tablewrap")) c.querySelectorAll("tbody tr").forEach(function(r,i){T2(r,"fade",i);});
+        else T2(c,"up",1);
+      });
+    });
+    document.querySelectorAll(".pay-opt").forEach(function(e,i){T2(e,"pop",i%3);});
+    document.querySelectorAll("footer .wrap>*").forEach(function(e,i){T2(e,"up",i);});
+    if(!instant)return fresh;
+    return [];
+  }
+  function srShow(e){
+    srIO.unobserve(e); e.classList.remove("sr-h"); e.classList.add("sr-s");
+    clearTimeout(e._sr); e._sr=setTimeout(function(){e.classList.remove("sr-s");},2200);
+  }
+  function srArm(root){
+    if(RM||!srIO||!root)return;
+    var list=root.querySelectorAll("[data-sr]");
+    list.forEach(function(e){ srIO.unobserve(e); clearTimeout(e._sr); e.classList.remove("sr-s"); e.classList.add("sr-h"); });
+    void root.offsetHeight;
+    list.forEach(function(e){ srIO.observe(e); });
+  }
+  if(!RM&&"IntersectionObserver" in window){
+    srIO=new IntersectionObserver(function(en){ en.forEach(function(x){ if(x.isIntersecting)srShow(x.target); }); },{threshold:.1,rootMargin:"0px 0px -6% 0px"});
+  }
+  /* barra de progreso, sombra de la cabecera y parallax del héroe */
+  var spBar=$("#sprog"), spTop=document.querySelector(".topbar"), spTick=false;
+  function onScroll(){
+    if(spTick)return; spTick=true;
+    requestAnimationFrame(function(){
+      spTick=false;
+      var y=window.pageYOffset||0, h=document.documentElement.scrollHeight-window.innerHeight;
+      spBar.style.transform="scaleX("+(h>0?Math.min(1,y/h):0)+")";
+      spTop.classList.toggle("scrolled",y>10);
+      if(!RM&&y<900){var he=document.querySelector("#p-inicio .hero");if(he)he.style.setProperty("--sy",y);}
+    });
+  }
+  window.addEventListener("scroll",onScroll,{passive:true}); window.addEventListener("resize",onScroll);
 
   /* ===== Extras: tema, galería, oferta, cookies, WhatsApp ===== */
   function QL(o){return o[lang];}
@@ -1178,6 +1253,9 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
 
   route(true);
   applyLang();
+  srScan(false); srLive=true;
+  srArm($(".page.active")); document.querySelectorAll("footer [data-sr]").forEach(function(e){e.classList.add("sr-h");srIO&&srIO.observe(e);});
+  onScroll();
 })();
 </script>
 </body>
