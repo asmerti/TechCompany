@@ -337,9 +337,120 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
 .hero .wrap>div:first-child{translate:0 min(calc(var(--sy,0)*.18px),60px)}
 .hero .price-burst{translate:0 calc(var(--sy,0)*-.1px)}
 @media (prefers-reduced-motion:reduce){[data-sr]{transition:none!important;opacity:1!important;transform:none!important}.hero .wrap>div:first-child,.hero .price-burst{translate:none}.sprog{transition:none}}
+
+/* ===== sellos de confianza ===== */
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.trust-i{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:2px solid var(--ink);border-radius:8px;padding:16px;transition:transform .2s,box-shadow .2s}
+.trust-i:hover{transform:translateY(-3px);box-shadow:0 5px 0 var(--ink)}
+.trust-ic{flex:none;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:var(--ink);border:3px solid var(--ink);transition:transform .4s}
+.trust-i:hover .trust-ic{transform:rotate(-8deg) scale(1.08)}
+.trust-ic svg{width:28px;height:28px}
+.trust-i:nth-child(even) .trust-ic{background:var(--red);color:#fff}
+.trust-i b{display:block;font-family:var(--cond);font-weight:700;font-size:21px;line-height:1.15}
+.trust-i small{display:block;color:var(--muted);font-size:14.5px;line-height:1.35;margin-top:3px}
+.trust.compact{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}.trust.compact .trust-i{padding:12px;align-items:center}.trust.compact small{display:none}
+/* ===== pedido realizado ===== */
+.ok-card{position:relative;overflow:hidden;background:var(--surface);color:var(--text);border:3px solid var(--ink);border-radius:10px;padding:24px 20px 20px;margin-bottom:20px;text-align:center}
+.ok-check{width:78px;height:78px;margin:0 auto 8px;border-radius:50%;background:#1FA74A;display:grid;place-items:center;border:4px solid var(--ink);animation:ok-pop .6s cubic-bezier(.2,1.4,.4,1) both}
+.ok-check svg{width:46px;height:46px;fill:none;stroke:#fff;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;stroke-dashoffset:30;animation:ok-draw .5s .35s ease-out forwards}
+@keyframes ok-pop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes ok-draw{to{stroke-dashoffset:0}}
+.ok-card h3{font-size:clamp(28px,5vw,38px);text-transform:uppercase;margin-bottom:8px}
+.ok-paid{display:inline-flex;align-items:center;gap:8px;background:#E4F7EA;color:#0B6B2C;border:2px solid #1FA74A;border-radius:99px;padding:4px 14px;font-family:var(--cond);font-weight:700;font-size:18px}
+.ok-paid svg{width:18px;height:18px}
+.ok-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:18px 0 14px;text-align:left}
+.ok-cell{border:2px dashed var(--line);border-radius:8px;padding:10px 12px;background:var(--bg);display:flex;flex-direction:column;gap:2px}
+.ok-cell small{font-family:var(--cond);font-weight:700;color:var(--muted);font-size:15px;text-transform:uppercase}
+.ok-cell b{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:.03em;overflow-wrap:anywhere}
+.ok-cell b.mono{word-break:break-all}
+.ok-cell button{align-self:flex-start;font-family:var(--cond);font-weight:700;font-size:15px;padding:3px 12px;border:2px solid var(--ink);border-radius:99px;background:var(--yellow);color:var(--ink);cursor:pointer;margin-top:4px}
+.ok-note{font-size:14.5px;color:var(--muted);margin:12px 0 0}
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.confetti i{position:absolute;top:-16px;width:8px;height:14px;opacity:0;border-radius:2px;animation:conf 2.6s ease-out forwards}
+@keyframes conf{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(340px) rotate(620deg);opacity:0}}
+/* ===== seguimiento ===== */
+.trk-search{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;padding:18px}
+.trk-search .f{flex:1;min-width:220px}
+.trk-search input{text-transform:uppercase;letter-spacing:.08em;font-family:var(--cond);font-weight:700;font-size:22px}
+.trk-search .btn{border-radius:4px}
+.trk-recent{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0 22px;font-family:var(--cond);font-weight:600;font-size:17px}
+.trk-chip{font-family:var(--cond);font-weight:700;font-size:16px;padding:6px 14px;border:2px solid var(--ink);border-radius:99px;background:var(--surface);color:var(--text);cursor:pointer;transition:background .2s,transform .2s}
+.trk-chip:hover{background:var(--yellow);color:var(--ink);transform:translateY(-2px)}
+.trk-chip.demo{border-style:dashed}
+.trk-err{background:var(--surface);border:2px solid var(--red);color:var(--red);border-radius:8px;padding:16px 18px;font-weight:600;animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.trk-empty{text-align:center;padding:34px 18px;border:2px dashed var(--line);border-radius:10px;color:var(--muted)}
+.trk-empty svg{width:60px;height:60px;color:var(--red);animation:rb-bob 2.6s ease-in-out infinite}
+.trk-card{background:var(--surface);border:3px solid var(--ink);border-radius:10px;overflow:hidden;animation:rise .6s both}
+.trk-top{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;padding:24px 22px;background:var(--ink);color:#fff;align-items:center;position:relative;overflow:hidden}
+.trk-top::after{content:"";position:absolute;right:-40px;top:-60px;width:220px;height:220px;border-radius:50%;background:var(--red);opacity:.35}
+.trk-top>*{position:relative;z-index:1}
+.trk-top h2{font-size:clamp(28px,4.6vw,46px);text-transform:uppercase;color:var(--yellow);margin:0}
+.trk-top p{margin:8px 0 0;color:#ddd}
+.trk-ribbon{display:inline-block;background:var(--yellow);color:var(--ink);font-family:var(--cond);font-weight:700;padding:2px 12px;border-radius:99px;margin-bottom:8px;font-size:15px}
+.trk-eta small{font-family:var(--cond);font-weight:700;font-size:17px;color:#ccc;display:block;text-transform:uppercase}
+.trk-eta .date{font-family:var(--display);font-size:clamp(24px,3.6vw,36px);line-height:1.1}.trk-eta .date::first-letter,.ok-cell b::first-letter{text-transform:uppercase}
+.trk-eta .win{font-family:var(--cond);font-weight:600;color:#ddd}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.cd div{background:var(--yellow);color:var(--ink);border-radius:8px;text-align:center;padding:8px 4px}
+.cd b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(24px,4vw,32px);line-height:1}
+.cd span{font-family:var(--cond);font-weight:700;font-size:13px;text-transform:uppercase}
+.trk-done-msg{background:#1FA74A;color:#fff;border-radius:8px;padding:12px 14px;font-family:var(--cond);font-weight:700;font-size:19px;margin-top:12px}
+.trk-prog{padding:26px 16px 6px}
+.steps{position:relative;display:grid;grid-template-columns:repeat(5,1fr)}
+.steps::before{content:"";position:absolute;left:10%;right:10%;top:26px;height:6px;background:var(--line);border-radius:6px}
+.steps .fill{position:absolute;left:10%;top:26px;height:6px;background:linear-gradient(90deg,var(--red),var(--yellow));border-radius:6px;width:0;transition:width 1.5s cubic-bezier(.2,.7,.2,1)}
+.st{position:relative;text-align:center;z-index:1;padding:0 2px}
+.st-ic{width:54px;height:54px;border-radius:50%;margin:0 auto 8px;display:grid;place-items:center;border:3px solid var(--line);background:var(--surface);color:var(--muted);transition:background .4s,color .4s,border-color .4s}
+.st-ic svg{width:26px;height:26px}
+.st.fin .st-ic{background:#1FA74A;border-color:var(--ink);color:#fff}
+.st.cur .st-ic{background:var(--yellow);border-color:var(--ink);color:var(--ink);animation:trk-pulse 1.8s infinite}
+.st b{font-family:var(--cond);font-weight:700;font-size:16px;line-height:1.15;display:block}
+.st:not(.fin):not(.cur) b{color:var(--muted)}
+@keyframes trk-pulse{0%{box-shadow:0 0 0 0 rgba(200,16,46,.55)}100%{box-shadow:0 0 0 16px rgba(200,16,46,0)}}
+.route{padding:10px 20px 4px}
+.route svg{width:100%;height:auto;display:block;border:2px solid var(--line);border-radius:10px;background:var(--bg)}
+.route .base{fill:none;stroke:var(--muted);stroke-width:4;stroke-dasharray:2 10;stroke-linecap:round;opacity:.6}
+.route .rdone{fill:none;stroke:var(--red);stroke-width:5;stroke-linecap:round;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.7,.2,1)}
+.route text{font-family:var(--cond);font-weight:700;font-size:13px;fill:var(--text)}
+.trk-info{display:grid;grid-template-columns:auto 1fr 1fr;gap:12px 22px;padding:18px 22px;border-top:2px dashed var(--line);align-items:center}
+.trk-info img{width:120px;height:84px;object-fit:contain;background:radial-gradient(circle,#fff,#ecece6);border:2px solid var(--ink);border-radius:8px;padding:6px}
+.kv small{display:block;font-family:var(--cond);font-weight:700;font-size:14px;text-transform:uppercase;color:var(--muted)}
+.kv b{font-family:var(--cond);font-weight:700;font-size:19px;line-height:1.2;word-break:break-word}
+.tl{list-style:none;margin:0;padding:18px 22px 10px;border-top:2px dashed var(--line)}
+.tl li{position:relative;padding:0 0 18px 40px}
+.tl li::before{content:"";position:absolute;left:11px;top:26px;bottom:-4px;width:3px;background:var(--line)}
+.tl li:last-child::before{display:none}
+.tl li.fin::before{background:#1FA74A}
+.tl .dot{position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;border:3px solid var(--line);background:var(--surface);display:grid;place-items:center;color:#fff}
+.tl .dot svg{width:14px;height:14px;stroke-width:3.5}
+.tl li.fin .dot{background:#1FA74A;border-color:var(--ink)}
+.tl li.cur .dot{background:var(--yellow);border-color:var(--ink);animation:trk-pulse 1.8s infinite;color:var(--ink)}
+.tl .tt{font-family:var(--cond);font-weight:700;font-size:20px;line-height:1.2}
+.tl .tm{font-size:14px;color:var(--muted)}
+.tl .td{margin:1px 0 0;font-size:15.5px}
+.tl li.fut{opacity:.55}
+.trk-foot{padding:0 22px 20px;font-size:14px;color:var(--muted)}
+@media (max-width:700px){.trk-top{grid-template-columns:1fr}.trk-info{grid-template-columns:1fr}.st b{font-size:13px}.st-ic{width:44px;height:44px}.steps::before,.steps .fill{top:21px}.st-ic svg{width:22px;height:22px}}
+/* ===== legal ===== */
+.legal-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0;border-bottom:4px solid var(--ink)}
+.legal-tabs a{font-family:var(--cond);font-weight:700;font-size:19px;padding:9px 16px;text-decoration:none;border:2px solid var(--ink);border-bottom:0;border-radius:8px 8px 0 0;background:var(--surface);position:relative;top:4px;transition:background .2s,padding .2s}
+.legal-tabs a:hover{background:var(--yellow);color:var(--ink)}
+.legal-tabs a[aria-current="true"]{background:var(--yellow);color:var(--ink);top:0;padding-bottom:13px;margin-bottom:-0px}
+.legal-doc{background:var(--surface);border:2px solid var(--ink);border-top:0;border-radius:0 0 8px 8px;padding:clamp(18px,3vw,34px);animation:legal-in .45s both}
+.legal-doc h2{font-size:clamp(28px,4vw,42px);text-transform:uppercase;margin-bottom:8px}
+.legal-doc h3{font-family:var(--cond);font-weight:700;font-size:21px;margin:22px 0 4px;letter-spacing:0}
+.legal-doc p{margin:0 0 6px;line-height:1.65;max-width:78ch}
+.ph{background:var(--yellow);color:var(--ink);padding:0 4px;border-radius:3px}
+.legal-hint{background:var(--bg);border-left:5px solid var(--yellow);padding:10px 14px;margin:0 0 6px;font-size:14.5px;color:var(--muted);border-radius:0 6px 6px 0}
+@keyframes legal-in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.legal-note{margin:2px 0 0;font-size:14.5px;color:var(--muted)}.legal-note a{color:var(--red);font-weight:600}
+footer .foot-links{display:flex;flex-direction:column;gap:2px}footer .foot-links a{color:#ddd;text-decoration:none;font-family:var(--cond);font-size:17px}footer .foot-links a:hover{color:var(--yellow);text-decoration:underline}
+@media (prefers-reduced-motion:reduce){.ok-check,.ok-check svg,.st.cur .st-ic,.tl li.cur .dot,.trk-card,.legal-doc,.trk-err,.trk-empty svg{animation:none}.ok-check svg{stroke-dashoffset:0}.steps .fill,.route .rdone{transition:none}.confetti{display:none}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol><symbol id="i-truck" viewBox="0 0 24 24"><path d="M2 6h11v10H2zM13 9h4l4 3v4h-8"/><circle cx="7" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3M12 15v2"/></symbol><symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol><symbol id="i-headset" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/><path d="M19 20c0 1.5-2 2-5 2"/></symbol><symbol id="i-return" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></symbol><symbol id="i-box" viewBox="0 0 24 24"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol></defs></svg>
 <div class="sprog" id="sprog" aria-hidden="true"></div>
 
 <div class="promo" id="promo"><span>Envío incluido en los equipos A y B</span><b id="promo-t" data-dyn></b><button type="button" class="promo-x" id="promo-x" aria-label="Cerrar">×</button></div>
@@ -353,6 +464,7 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
       <a href="#especificaciones" data-nav="especificaciones">Especificaciones</a>
       <a href="#opiniones" data-nav="opiniones">Opiniones</a>
       <a href="#pedido" data-nav="pedido">Hacer pedido</a>
+      <a href="#seguimiento" data-nav="seguimiento">Seguimiento</a>
       <a href="#envio" data-nav="envio">Envío y garantía</a>
       <a href="#contacto" data-nav="contacto">Contacto</a>
     </nav>
@@ -393,6 +505,20 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
       <h2 class="sec-title">Tres equipos, tres presupuestos</h2>
       <p class="sec-sub">Desde un PC básico para el día a día hasta un equipo profesional compacto. Todos los precios llevan IVA incluido.</p>
       <div class="grid3" id="home-cards" data-dyn></div>
+    </div>
+  </section>
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <h2 class="sec-title">Compra con tranquilidad</h2>
+      <p class="sec-sub">Garantía, envío asegurado y pago seguro en cada pedido.</p>
+      <div class="trust">
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg></span><div><b>Garantía de 3 años</b><small>En todos los equipos, con soporte técnico incluido</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-truck"/></svg></span><div><b>Envío asegurado</b><small>Tu PC viaja protegido y asegurado hasta tu puerta</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-lock"/></svg></span><div><b>Pago seguro</b><small>Tarjeta, PayPal, Bizum, transferencia o contra reembolso</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cpu"/></svg></span><div><b>Montaje profesional</b><small>Montado, probado y con Windows 11 instalado</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-headset"/></svg></span><div><b>Soporte humano</b><small>Te atendemos por teléfono y por correo</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-return"/></svg></span><div><b>14 días para devolver</b><small>Derecho de desistimiento según la ley</small></div></div>
+      </div>
     </div>
   </section>
   <section class="block" id="test" style="padding-top:0">
@@ -503,10 +629,12 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
               </div>
             </fieldset>
             <div class="check"><input type="checkbox" id="ok"><label for="ok">Acepto las condiciones de compra y el tratamiento de mis datos para gestionar el pedido.</label></div>
+            <p class="legal-note">Al enviar el pedido aceptas las <a href="#legal/condiciones">Condiciones de compra</a> y la <a href="#legal/privacidad">Política de privacidad</a>.</p>
             <p class="err" id="err" data-dyn role="alert"></p>
             <button class="btn dark" type="submit">Enviar pedido por correo</button>
           </form>
           <div class="done" id="done" role="status">
+            <div class="ok-card" id="ok-card" data-dyn></div>
             <h3>Pedido preparado</h3>
             <p>Se ha abierto tu programa de correo. Si no se ha abierto, copia este resumen y envíalo a <strong>techcompany@gmail.com</strong>.</p>
             <pre id="done-text" data-dyn></pre>
@@ -529,6 +657,14 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
           <small id="s-note" data-dyn></small>
         </aside>
       </div>
+      <div style="margin-top:26px"><div class="trust compact">
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg></span><div><b>Garantía de 3 años</b><small>En todos los equipos, con soporte técnico incluido</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-truck"/></svg></span><div><b>Envío asegurado</b><small>Tu PC viaja protegido y asegurado hasta tu puerta</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-lock"/></svg></span><div><b>Pago seguro</b><small>Tarjeta, PayPal, Bizum, transferencia o contra reembolso</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cpu"/></svg></span><div><b>Montaje profesional</b><small>Montado, probado y con Windows 11 instalado</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-headset"/></svg></span><div><b>Soporte humano</b><small>Te atendemos por teléfono y por correo</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-return"/></svg></span><div><b>14 días para devolver</b><small>Derecho de desistimiento según la ley</small></div></div>
+      </div></div>
     </div>
   </section>
 </div>
@@ -544,6 +680,40 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
         <div class="card b"><div class="head"><h3>Montaje</h3></div><div class="body"><p>La mano de obra de montaje está incluida. Recibes el equipo montado y con Windows 11 instalado.</p></div></div>
         <div class="card c"><div class="head"><h3>Garantía</h3></div><div class="body"><p>3 años de garantía y soporte en todos los equipos.</p></div></div>
       </div>
+      <div style="margin-top:26px"><div class="trust">
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg></span><div><b>Garantía de 3 años</b><small>En todos los equipos, con soporte técnico incluido</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-truck"/></svg></span><div><b>Envío asegurado</b><small>Tu PC viaja protegido y asegurado hasta tu puerta</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-lock"/></svg></span><div><b>Pago seguro</b><small>Tarjeta, PayPal, Bizum, transferencia o contra reembolso</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cpu"/></svg></span><div><b>Montaje profesional</b><small>Montado, probado y con Windows 11 instalado</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-headset"/></svg></span><div><b>Soporte humano</b><small>Te atendemos por teléfono y por correo</small></div></div>
+        <div class="trust-i"><span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-return"/></svg></span><div><b>14 días para devolver</b><small>Derecho de desistimiento según la ley</small></div></div>
+      </div></div>
+    </div>
+  </section>
+</div>
+
+<!-- SEGUIMIENTO -->
+<div class="page" id="p-seguimiento">
+  <section class="block">
+    <div class="wrap">
+      <h1 class="sec-title">Seguimiento de pedido</h1>
+      <p class="sec-sub">Introduce el código de seguimiento que te dimos al hacer el pedido y mira dónde está tu PC.</p>
+      <form id="trk-form" class="trk-search" novalidate>
+        <div class="f"><label for="trk-in">Código de seguimiento</label><input id="trk-in" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="TC1234567890" maxlength="24"></div>
+        <button class="btn dark" type="submit">Rastrear</button>
+      </form>
+      <div id="trk-root" data-dyn aria-live="polite"></div>
+    </div>
+  </section>
+</div>
+
+<!-- LEGAL -->
+<div class="page" id="p-legal">
+  <section class="block">
+    <div class="wrap">
+      <h1 class="sec-title">Información legal</h1>
+      <p class="sec-sub">Todo lo que debes saber sobre tus datos, tu compra y tus derechos.</p>
+      <div id="legal-root" data-dyn></div>
     </div>
   </section>
 </div>
@@ -585,6 +755,7 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
   <div class="wrap">
     <div><b>TechCompany</b><br>PC de oficina montado a piezas</div>
     <div>676 967 696 · techcompany@gmail.com<br>Precios con IVA incluido</div>
+    <div class="foot-links"><a href="#legal/aviso">Aviso legal</a><a href="#legal/privacidad">Política de privacidad</a><a href="#legal/cookies">Política de cookies</a><a href="#legal/condiciones">Condiciones de compra</a></div>
   </div>
 </footer>
 
@@ -664,6 +835,7 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
   Object.assign(CA,{"Envío incluido en los equipos A y B": "Enviament inclòs als equips A i B", "Esta web solo guarda en tu navegador tu idioma, tema y opiniones. No usamos cookies de seguimiento ni publicidad.": "Aquest web només desa al teu navegador l’idioma, el tema i les opinions. No fem servir galetes de seguiment ni publicitat.", "Entendido": "Entesos", "Cerrar": "Tancar", "Anterior": "Anterior", "Siguiente": "Següent", "Galería": "Galeria", "Pulsa la imagen para ampliarla": "Prem la imatge per ampliar-la"}); Object.assign(EN,{"Envío incluido en los equipos A y B": "Shipping included on PCs A and B", "Esta web solo guarda en tu navegador tu idioma, tema y opiniones. No usamos cookies de seguimiento ni publicidad.": "This site only stores your language, theme and reviews in your browser. We don’t use tracking or advertising cookies.", "Entendido": "Got it", "Cerrar": "Close", "Anterior": "Previous", "Siguiente": "Next", "Galería": "Gallery", "Pulsa la imagen para ampliarla": "Click the image to zoom"});
   Object.assign(CA,{"¿Qué PC es el tuyo?": "Quin PC és el teu?", "Responde 5 preguntas rápidas y te recomendamos el equipo que mejor encaja contigo.": "Respon 5 preguntes ràpides i et recomanem l’equip que millor encaixa amb tu."}); Object.assign(EN,{"¿Qué PC es el tuyo?": "Which PC is right for you?", "Responde 5 preguntas rápidas y te recomendamos el equipo que mejor encaja contigo.": "Answer 5 quick questions and we’ll recommend the PC that fits you best."});
   Object.assign(CA,{"Método de pago": "Mètode de pagament", "Elige cómo prefieres pagar. No se cobra nada al enviar el formulario: te confirmaremos los detalles del pago por correo o teléfono.": "Tria com prefereixes pagar. No es cobra res en enviar el formulari: et confirmarem els detalls del pagament per correu o telèfon.", "Tarjeta de crédito o débito": "Targeta de crèdit o dèbit", "Cuenta PayPal": "Compte PayPal", "Pago desde el móvil": "Pagament des del mòbil", "Pago sin contacto": "Pagament sense contacte", "Transferencia bancaria": "Transferència bancària", "Desde tu banco": "Des del teu banc", "Contra reembolso": "Contra reemborsament", "Pago al recibir el equipo": "Pagament en rebre l'equip", "Pago": "Pagament", "Elige un método de pago.": "Tria un mètode de pagament."}); Object.assign(EN,{"Método de pago": "Payment method", "Elige cómo prefieres pagar. No se cobra nada al enviar el formulario: te confirmaremos los detalles del pago por correo o teléfono.": "Choose how you prefer to pay. Nothing is charged when you send the form: we will confirm the payment details by email or phone.", "Tarjeta de crédito o débito": "Credit or debit card", "Cuenta PayPal": "PayPal account", "Pago desde el móvil": "Pay from your phone", "Pago sin contacto": "Contactless payment", "Transferencia bancaria": "Bank transfer", "Desde tu banco": "From your bank", "Contra reembolso": "Cash on delivery", "Pago al recibir el equipo": "Pay when you receive it", "Pago": "Payment", "Elige un método de pago.": "Please choose a payment method."});
+  Object.assign(CA,{"Seguimiento": "Seguiment", "Seguimiento de pedido": "Seguiment de la comanda", "Introduce el código de seguimiento que te dimos al hacer el pedido y mira dónde está tu PC.": "Introdueix el codi de seguiment que et vam donar en fer la comanda i mira on és el teu PC.", "Código de seguimiento": "Codi de seguiment", "Rastrear": "Rastrejar", "Información legal": "Informació legal", "Todo lo que debes saber sobre tus datos, tu compra y tus derechos.": "Tot el que has de saber sobre les teves dades, la teva compra i els teus drets.", "Compra con tranquilidad": "Compra amb tranquil·litat", "Garantía, envío asegurado y pago seguro en cada pedido.": "Garantia, enviament assegurat i pagament segur en cada comanda.", "Garantía de 3 años": "Garantia de 3 anys", "En todos los equipos, con soporte técnico incluido": "En tots els equips, amb suport tècnic inclòs", "Envío asegurado": "Enviament assegurat", "Tu PC viaja protegido y asegurado hasta tu puerta": "El teu PC viatja protegit i assegurat fins a la teva porta", "Pago seguro": "Pagament segur", "Tarjeta, PayPal, Bizum, transferencia o contra reembolso": "Targeta, PayPal, Bizum, transferència o contra reemborsament", "Montaje profesional": "Muntatge professional", "Montado, probado y con Windows 11 instalado": "Muntat, provat i amb Windows 11 instal·lat", "Soporte humano": "Suport humà", "Te atendemos por teléfono y por correo": "T'atenem per telèfon i per correu", "14 días para devolver": "14 dies per tornar", "Derecho de desistimiento según la ley": "Dret de desistiment segons la llei", "Aviso legal": "Avís legal", "Política de privacidad": "Política de privadesa", "Política de cookies": "Política de cookies", "Condiciones de compra": "Condicions de compra", "Al enviar el pedido aceptas las": "En enviar la comanda acceptes les", "y la": "i la"}); Object.assign(EN,{"Seguimiento": "Tracking", "Seguimiento de pedido": "Order tracking", "Introduce el código de seguimiento que te dimos al hacer el pedido y mira dónde está tu PC.": "Enter the tracking code we gave you when you placed your order and see where your PC is.", "Código de seguimiento": "Tracking code", "Rastrear": "Track", "Información legal": "Legal information", "Todo lo que debes saber sobre tus datos, tu compra y tus derechos.": "Everything you should know about your data, your purchase and your rights.", "Compra con tranquilidad": "Shop with peace of mind", "Garantía, envío asegurado y pago seguro en cada pedido.": "Warranty, insured shipping and secure payment on every order.", "Garantía de 3 años": "3-year warranty", "En todos los equipos, con soporte técnico incluido": "On every PC, technical support included", "Envío asegurado": "Insured shipping", "Tu PC viaja protegido y asegurado hasta tu puerta": "Your PC travels protected and insured to your door", "Pago seguro": "Secure payment", "Tarjeta, PayPal, Bizum, transferencia o contra reembolso": "Card, PayPal, Bizum, bank transfer or cash on delivery", "Montaje profesional": "Professional assembly", "Montado, probado y con Windows 11 instalado": "Built, tested and with Windows 11 installed", "Soporte humano": "Human support", "Te atendemos por teléfono y por correo": "We help you by phone and email", "14 días para devolver": "14 days to return", "Derecho de desistimiento según la ley": "Right of withdrawal as required by law", "Aviso legal": "Legal notice", "Política de privacidad": "Privacy policy", "Política de cookies": "Cookie policy", "Condiciones de compra": "Terms of sale", "Al enviar el pedido aceptas las": "By sending your order you accept the", "y la": "and the"});
   function T(s){ var d=DICT[lang]; return (d && d[s]!==undefined) ? d[s] : s; }
 
   var PRODS = {
@@ -794,6 +966,7 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
     var rc=$("#rv-eq").value||"A"; $("#rv-eq").innerHTML=sel.innerHTML; $("#rv-eq").value=rc;
     renderRev(); renderQuiz(); paintRate(); $("#rv-err").textContent=rvErr?T(rvErr):""; $("#rv-ok").textContent=rvOk?T(rvOk):"";
     buildOrder(false);
+    renderTrk(); renderLegal();
     if(srLive)srScan(true);
   }
 
@@ -814,10 +987,12 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
     if(!lastOrder)return;
     var p=PRODS[lastOrder.p], q=lastOrder.q, f=lastOrder.f;
     lastBody=T("NUEVO PEDIDO")+"\n\n"+T("Equipo")+": "+T(p.tag)+" ("+T(p.name)+")\n"+T("Cantidad")+": "+q+"\n"+T("Precio unidad")+": "+eur(p.price)+"\n"+T("Total")+": "+eur(p.price*q)+promoLine(p,q)+"\n"+T("Método de pago")+": "+T(PAYN[lastOrder.pay])+
+      "\n"+X("Nº de pedido","Núm. de comanda","Order no.")+": "+lastOrder.ord.id+"\n"+T("Código de seguimiento")+": "+lastOrder.ord.code+
       "\n\n"+T("Nombre")+": "+f.nombre+"\n"+T("Correo")+": "+f.email+"\n"+T("Teléfono")+": "+f.tel+"\n"+T("Dirección de envío")+": "+f.dir+"\n"+T("Observaciones")+": "+(f.obs||"—");
     lastHref="mailto:techcompany@gmail.com?subject="+encodeURIComponent(T("Pedido")+" "+T(p.tag)+" x"+q)+"&body="+encodeURIComponent(lastBody);
     $("#done-text").textContent=lastBody;
     $("#mail").setAttribute("href",lastHref);
+    renderOk();
   }
   function setErr(k){errKey=k;$("#err").textContent=k?T(k):"";}
 
@@ -831,7 +1006,8 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
     if(!payVal()){setErr("Elige un método de pago.");var pf=document.querySelector('#order input[name="pago"]');if(pf)pf.focus();return;}
     if(!$("#ok").checked){setErr("Acepta las condiciones para continuar.");return;}
     setErr("");
-    lastOrder={p:sel.value,q:q,f:f,promo:promoOn,pay:payVal()};
+    var pp=PRODS[sel.value], ord=newOrder(sel.value,q,f,pp.price*q-discount(pp,q),payVal()); saveOrders([ord].concat(loadOrders()));
+    lastOrder={p:sel.value,q:q,f:f,promo:promoOn,pay:payVal(),ord:ord}; var okh=$("#ok-card"); if(okh)okh.dataset.conf="";
     buildOrder();
     $("#done").classList.add("show");
     $("#done").scrollIntoView({behavior:"smooth",block:"nearest"});
@@ -845,24 +1021,27 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
   });
 
   /* ===== Navegación por páginas ===== */
-  var PAGES=["inicio","catalogo","comparador","especificaciones","opiniones","pedido","envio","contacto"];
-  var TITLES={inicio:"",catalogo:"Catálogo",comparador:"Comparador",especificaciones:"Especificaciones",opiniones:"Opiniones",pedido:"Hacer pedido",envio:"Envío y garantía",contacto:"Contacto"};
+  var PAGES=["inicio","catalogo","comparador","especificaciones","opiniones","pedido","seguimiento","envio","contacto","legal"];
+  var TITLES={inicio:"",catalogo:"Catálogo",comparador:"Comparador",especificaciones:"Especificaciones",opiniones:"Opiniones",pedido:"Hacer pedido",seguimiento:"Seguimiento",legal:"Información legal",envio:"Envío y garantía",contacto:"Contacto"};
   var pick=null, current="inicio";
   function setTitle(){
     document.title=(TITLES[current]?T(TITLES[current])+" · ":"")+T("TechCompany · PC de oficina montado a piezas");
   }
+  var routeArg="", lastPage="";
   function onScrollSafe(){try{window.dispatchEvent(new Event("scroll"));}catch(e){}}
   var rtok=0, RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
   function route(first){
-    var h=(location.hash||"#inicio").replace("#","");
-    if(PAGES.indexOf(h)<0)h="inicio";
+    var h=(location.hash||"#inicio").replace("#",""), hp=h.split("/"); h=hp[0]; routeArg=hp.slice(1).join("/"); try{routeArg=decodeURIComponent(routeArg);}catch(e){}
+    if(PAGES.indexOf(h)<0){h="inicio";routeArg="";}
     current=h; var tok=++rtok, prev=document.querySelector(".page.active");
     document.querySelectorAll("nav a").forEach(function(a){ if(a.dataset.nav===h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current"); });
     if(h==="pedido"&&pick){sel.value=pick;upd();pick=null;}
     function show(){
       if(tok!==rtok)return;
       PAGES.forEach(function(p){var el=$("#p-"+p);el.classList.remove("leaving");el.classList.toggle("active",p===h);});
-      setTitle(); window.scrollTo(0,0); if(srLive)srArm($("#p-"+h)); onScrollSafe();
+      var same=(lastPage===h); lastPage=h;
+      if(h==="legal")setLegalTab(routeArg); if(h==="seguimiento")trkEnter(routeArg);
+      setTitle(); if(!(same&&(h==="legal"||h==="seguimiento")))window.scrollTo(0,0); if(srLive&&!same)srArm($("#p-"+h)); onScrollSafe();
       if(h==="opiniones"&&rvFocus){var t=$("#rev-"+rvFocus);rvFocus=null;if(t)setTimeout(function(){t.scrollIntoView({behavior:"smooth",block:"start"});},350);}
     }
     if(prev&&prev.id!=="p-"+h&&first!==true&&!RM){prev.classList.add("leaving");setTimeout(show,180);}else show();
@@ -874,6 +1053,210 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
   });
   window.addEventListener("hashchange",function(){route();});
 
+
+
+  /* ===== Pedido realizado, seguimiento e información legal ===== */
+  function X(a,b,c){return lang==="ca"?b:(lang==="en"?c:a);}
+  var LANGTAG={es:"es-ES",ca:"ca-ES",en:"en-GB"};
+  function fmtD(ts,o){try{return new Date(ts).toLocaleString(LANGTAG[lang],o);}catch(e){return new Date(ts).toString();}}
+  /* >>> EDITA AQUÍ los datos legales de la empresa (se muestran resaltados en amarillo mientras empiecen por "[") <<< */
+  var LEGAL={
+    TITULAR:{es:"[Nombre o razón social del titular]",ca:"[Nom o raó social del titular]",en:"[Owner's name or company name]"},
+    NIF:{es:"[NIF/CIF]",ca:"[NIF/CIF]",en:"[Tax ID]"},
+    DOM:{es:"[dirección postal completa]",ca:"[adreça postal completa]",en:"[full postal address]"},
+    REG:{es:"[datos del Registro Mercantil, si procede]",ca:"[dades del Registre Mercantil, si escau]",en:"[commercial registry details, if applicable]"},
+    EMAIL:"techcompany@gmail.com", TEL:"676 967 696"
+  };
+  var LG={"aviso": {"es": {"t": "Aviso legal", "s": [["1. Datos identificativos", "En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de que este sitio web, bajo el nombre comercial TechCompany, es titularidad de {TITULAR}, con NIF {NIF} y domicilio en {DOM}. Inscripción registral: {REG}. Contacto: correo electrónico {EMAIL} y teléfono {TEL}."], ["2. Objeto", "Este sitio web tiene por objeto la información y comercialización de ordenadores de oficina montados a piezas y de los servicios asociados: montaje, instalación del sistema operativo, garantía y soporte técnico."], ["3. Condiciones de uso", "El acceso y la utilización del sitio atribuyen la condición de usuario e implican la aceptación plena de este Aviso Legal. El usuario se compromete a hacer un uso adecuado de los contenidos y servicios, a no emplearlos para actividades ilícitas o contrarias a la buena fe y al orden público, a no difundir contenidos de carácter racista, xenófobo, pornográfico o que atenten contra los derechos humanos, y a no provocar daños en los sistemas físicos o lógicos de TechCompany o de terceros."], ["4. Propiedad intelectual e industrial", "Los textos, imágenes, diseños, logotipos, código fuente y demás elementos de este sitio son titularidad de {TITULAR} o de terceros que han autorizado su uso, y están protegidos por la normativa de propiedad intelectual e industrial. Queda prohibida su reproducción, distribución, comunicación pública o transformación sin autorización expresa. Las marcas y nombres comerciales de terceros (Intel, HP, Logitech, Microsoft, KOORUI, MSI y otros) pertenecen a sus respectivos titulares y se citan con fines meramente informativos."], ["5. Exclusión de responsabilidad", "TechCompany procura que la información del sitio sea exacta y esté actualizada, pero no garantiza la ausencia de errores ni la disponibilidad ininterrumpida del servicio, y no responde de los daños derivados de interrupciones, fallos técnicos o virus ajenos a su control. Las características de los productos pueden variar por decisión de los fabricantes; en tal caso se ofrecerá un componente equivalente o superior."], ["6. Enlaces a terceros", "Este sitio puede contener enlaces a páginas web de terceros. TechCompany no controla su contenido ni se hace responsable de él, y su inclusión no implica recomendación ni relación alguna con sus titulares."], ["7. Protección de datos", "El tratamiento de los datos personales se rige por nuestra Política de Privacidad, que puedes consultar en el apartado correspondiente de esta página."], ["8. Legislación aplicable y jurisdicción", "Este Aviso Legal se rige por la legislación española. Para cualquier controversia, y siempre que la normativa de consumidores no establezca un fuero imperativo distinto (como el del domicilio del consumidor), las partes se someten a los juzgados y tribunales del domicilio del titular."], ["9. Modificaciones", "TechCompany se reserva el derecho a modificar este Aviso Legal para adaptarlo a cambios legislativos o de su actividad. Última actualización: {FECHA}."]]}, "ca": {"t": "Avís legal", "s": [["1. Dades identificatives", "En compliment de l'article 10 de la Llei 34/2002, d'11 de juliol, de Serveis de la Societat de la Informació i de Comerç Electrònic (LSSI-CE), s'informa que aquest lloc web, sota el nom comercial TechCompany, és titularitat de {TITULAR}, amb NIF {NIF} i domicili a {DOM}. Inscripció registral: {REG}. Contacte: correu electrònic {EMAIL} i telèfon {TEL}."], ["2. Objecte", "Aquest lloc web té per objecte la informació i la comercialització d'ordinadors d'oficina muntats a peces i dels serveis associats: muntatge, instal·lació del sistema operatiu, garantia i suport tècnic."], ["3. Condicions d'ús", "L'accés i la utilització del lloc atribueixen la condició d'usuari i impliquen l'acceptació plena d'aquest Avís Legal. L'usuari es compromet a fer un ús adequat dels continguts i serveis, a no emprar-los per a activitats il·lícites o contràries a la bona fe i a l'ordre públic, a no difondre continguts de caràcter racista, xenòfob, pornogràfic o que atemptin contra els drets humans, i a no provocar danys en els sistemes físics o lògics de TechCompany o de tercers."], ["4. Propietat intel·lectual i industrial", "Els textos, imatges, dissenys, logotips, codi font i altres elements d'aquest lloc són titularitat de {TITULAR} o de tercers que n'han autoritzat l'ús, i estan protegits per la normativa de propietat intel·lectual i industrial. Queda prohibida la seva reproducció, distribució, comunicació pública o transformació sense autorització expressa. Les marques i noms comercials de tercers (Intel, HP, Logitech, Microsoft, KOORUI, MSI i altres) pertanyen als seus respectius titulars i es citen amb finalitats merament informatives."], ["5. Exclusió de responsabilitat", "TechCompany procura que la informació del lloc sigui exacta i estigui actualitzada, però no garanteix l'absència d'errors ni la disponibilitat ininterrompuda del servei, i no respon dels danys derivats d'interrupcions, fallades tècniques o virus aliens al seu control. Les característiques dels productes poden variar per decisió dels fabricants; en aquest cas s'oferirà un component equivalent o superior."], ["6. Enllaços a tercers", "Aquest lloc pot contenir enllaços a pàgines web de tercers. TechCompany no en controla el contingut ni se'n fa responsable, i la seva inclusió no implica recomanació ni relació amb els seus titulars."], ["7. Protecció de dades", "El tractament de les dades personals es regeix per la nostra Política de Privadesa, que pots consultar a l'apartat corresponent d'aquesta pàgina."], ["8. Legislació aplicable i jurisdicció", "Aquest Avís Legal es regeix per la legislació espanyola. Per a qualsevol controvèrsia, i sempre que la normativa de consumidors no estableixi un fur imperatiu diferent (com el del domicili del consumidor), les parts se sotmeten als jutjats i tribunals del domicili del titular."], ["9. Modificacions", "TechCompany es reserva el dret de modificar aquest Avís Legal per adaptar-lo a canvis legislatius o de la seva activitat. Darrera actualització: {FECHA}."]]}, "en": {"t": "Legal notice", "s": [["1. Identification details", "In compliance with Article 10 of Spanish Act 34/2002 of 11 July on Information Society Services and Electronic Commerce (LSSI-CE), we inform you that this website, operating under the trade name TechCompany, is owned by {TITULAR}, tax ID {NIF}, with registered address at {DOM}. Commercial registry details: {REG}. Contact: email {EMAIL} and phone {TEL}."], ["2. Purpose", "This website provides information on and sells office PCs built from parts, together with related services: assembly, operating system installation, warranty and technical support."], ["3. Terms of use", "Accessing and using the site makes you a user and means you fully accept this Legal Notice. Users agree to use the content and services properly; not to use them for unlawful activities or activities contrary to good faith and public order; not to spread racist, xenophobic or pornographic content or content that violates human rights; and not to damage the physical or logical systems of TechCompany or third parties."], ["4. Intellectual and industrial property", "The texts, images, designs, logos, source code and other elements of this site belong to {TITULAR} or to third parties who have authorised their use, and are protected by intellectual and industrial property law. Reproducing, distributing, publicly communicating or modifying them without express permission is prohibited. Third-party trademarks and trade names (Intel, HP, Logitech, Microsoft, KOORUI, MSI and others) belong to their respective owners and are mentioned for information purposes only."], ["5. Disclaimer of liability", "TechCompany strives to keep the information on the site accurate and up to date, but does not guarantee that it is error-free or that the service will be available without interruption, and is not liable for damage caused by interruptions, technical failures or viruses beyond its control. Product specifications may change at the manufacturers' discretion; in that case an equivalent or better component will be supplied."], ["6. Third-party links", "This site may contain links to third-party websites. TechCompany does not control their content and is not responsible for it, and including a link does not imply endorsement of or any relationship with their owners."], ["7. Data protection", "The processing of personal data is governed by our Privacy Policy, which you can read in the corresponding section of this page."], ["8. Governing law and jurisdiction", "This Legal Notice is governed by Spanish law. For any dispute, and unless consumer law establishes a different mandatory venue (such as the consumer's place of residence), the parties submit to the courts of the owner's registered address."], ["9. Changes", "TechCompany reserves the right to amend this Legal Notice to reflect changes in legislation or in its business. Last updated: {FECHA}."]]}}, "privacidad": {"es": {"t": "Política de privacidad", "s": [["1. Responsable del tratamiento", "El responsable del tratamiento de tus datos personales es {TITULAR}, con NIF {NIF} y domicilio en {DOM}. Puedes contactar con nosotros en {EMAIL} o en el teléfono {TEL}."], ["2. Datos que tratamos", "Tratamos los datos que nos facilitas al hacer un pedido (nombre y apellidos, correo electrónico, teléfono, dirección de envío, equipo y cantidad, método de pago elegido y observaciones), al escribirnos o usar el asistente, al suscribirte a nuestras novedades y al publicar una opinión. Esta web no almacena números de tarjeta ni credenciales bancarias."], ["3. Finalidades y base jurídica", "Gestionar tu pedido, el envío, la facturación y la garantía (ejecución del contrato, art. 6.1.b RGPD). Atender tus consultas y reclamaciones (art. 6.1.b y 6.1.f RGPD). Cumplir las obligaciones legales fiscales y contables (art. 6.1.c RGPD). Publicar tus opiniones y enviarte novedades u ofertas por correo electrónico, solo si nos has dado tu consentimiento, que puedes retirar en cualquier momento (art. 6.1.a RGPD)."], ["4. Plazo de conservación", "Conservaremos tus datos mientras dure la relación contractual y, después, durante los plazos de prescripción y de conservación exigidos por la normativa mercantil, fiscal y de consumo. Los datos de suscripción a novedades se conservarán hasta que retires tu consentimiento o te des de baja."], ["5. Destinatarios", "No cedemos tus datos a terceros salvo obligación legal. Pueden tener acceso a ellos, como encargados del tratamiento y con el correspondiente contrato conforme al art. 28 RGPD, los proveedores que nos prestan servicios necesarios para ejecutar tu pedido: transporte y mensajería, alojamiento web, correo electrónico y servicios de pago. No realizamos transferencias internacionales de datos; si alguno de nuestros proveedores estuviera fuera del Espacio Económico Europeo, se hará con las garantías adecuadas (por ejemplo, cláusulas contractuales tipo)."], ["6. Tus derechos", "Puedes ejercer los derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, así como retirar tu consentimiento, escribiendo a {EMAIL} e identificándote. Si consideras que tus datos no se tratan correctamente, tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (www.aepd.es)."], ["7. Datos guardados en tu dispositivo", "Esta web guarda en tu navegador (almacenamiento local) tu idioma, el tema claro u oscuro, tus opiniones, tu participación en la ruleta de premios y los pedidos realizados desde ese dispositivo, para que puedas consultar su seguimiento. Estos datos no se envían a ningún servidor y puedes borrarlos cuando quieras desde los ajustes de tu navegador."], ["8. Servicios de terceros", "Las tipografías se cargan desde Google Fonts, por lo que Google puede recibir tu dirección IP. Si usas el botón de WhatsApp, la conversación se rige por la política de privacidad de dicho servicio. El envío de un pedido abre tu programa de correo: el mensaje se transmite a través de tu proveedor de correo."], ["9. Seguridad", "Aplicamos las medidas técnicas y organizativas apropiadas para proteger tus datos frente a accesos no autorizados, pérdida o alteración."], ["10. Menores", "Nuestros servicios están dirigidos a personas mayores de edad. Si eres menor de 14 años, no debes facilitarnos datos personales sin el consentimiento de tus padres o tutores."], ["11. Cambios en esta política", "Podemos actualizar esta política para adaptarla a cambios legales o de nuestros servicios. Última actualización: {FECHA}."]]}, "ca": {"t": "Política de privadesa", "s": [["1. Responsable del tractament", "El responsable del tractament de les teves dades personals és {TITULAR}, amb NIF {NIF} i domicili a {DOM}. Pots contactar amb nosaltres a {EMAIL} o al telèfon {TEL}."], ["2. Dades que tractem", "Tractem les dades que ens facilites en fer una comanda (nom i cognoms, correu electrònic, telèfon, adreça d'enviament, equip i quantitat, mètode de pagament triat i observacions), en escriure'ns o utilitzar l'assistent, en subscriure't a les nostres novetats i en publicar una opinió. Aquest web no emmagatzema números de targeta ni credencials bancàries."], ["3. Finalitats i base jurídica", "Gestionar la teva comanda, l'enviament, la facturació i la garantia (execució del contracte, art. 6.1.b RGPD). Atendre les teves consultes i reclamacions (art. 6.1.b i 6.1.f RGPD). Complir les obligacions legals fiscals i comptables (art. 6.1.c RGPD). Publicar les teves opinions i enviar-te novetats o ofertes per correu electrònic, només si ens has donat el teu consentiment, que pots retirar en qualsevol moment (art. 6.1.a RGPD)."], ["4. Termini de conservació", "Conservarem les teves dades mentre duri la relació contractual i, després, durant els terminis de prescripció i de conservació exigits per la normativa mercantil, fiscal i de consum. Les dades de subscripció a novetats es conservaran fins que retiris el teu consentiment o et donis de baixa."], ["5. Destinataris", "No cedim les teves dades a tercers tret d'obligació legal. Hi poden tenir accés, com a encarregats del tractament i amb el contracte corresponent conforme a l'art. 28 RGPD, els proveïdors que ens presten serveis necessaris per executar la teva comanda: transport i missatgeria, allotjament web, correu electrònic i serveis de pagament. No fem transferències internacionals de dades; si algun dels nostres proveïdors fos fora de l'Espai Econòmic Europeu, es farà amb les garanties adequades (per exemple, clàusules contractuals tipus)."], ["6. Els teus drets", "Pots exercir els drets d'accés, rectificació, supressió, oposició, limitació del tractament i portabilitat, així com retirar el teu consentiment, escrivint a {EMAIL} i identificant-te. Si consideres que les teves dades no es tracten correctament, tens dret a presentar una reclamació davant l'Agència Espanyola de Protecció de Dades (www.aepd.es)."], ["7. Dades desades al teu dispositiu", "Aquest web desa al teu navegador (emmagatzematge local) el teu idioma, el tema clar o fosc, les teves opinions, la teva participació a la ruleta de premis i les comandes fetes des d'aquest dispositiu, perquè en puguis consultar el seguiment. Aquestes dades no s'envien a cap servidor i les pots esborrar quan vulguis des dels ajustos del teu navegador."], ["8. Serveis de tercers", "Les tipografies es carreguen des de Google Fonts, per la qual cosa Google pot rebre la teva adreça IP. Si uses el botó de WhatsApp, la conversa es regeix per la política de privadesa d'aquest servei. L'enviament d'una comanda obre el teu programa de correu: el missatge es transmet a través del teu proveïdor de correu."], ["9. Seguretat", "Apliquem les mesures tècniques i organitzatives apropiades per protegir les teves dades davant d'accessos no autoritzats, pèrdua o alteració."], ["10. Menors", "Els nostres serveis s'adrecen a persones majors d'edat. Si ets menor de 14 anys, no has de facilitar-nos dades personals sense el consentiment dels teus pares o tutors."], ["11. Canvis en aquesta política", "Podem actualitzar aquesta política per adaptar-la a canvis legals o dels nostres serveis. Darrera actualització: {FECHA}."]]}, "en": {"t": "Privacy policy", "s": [["1. Data controller", "The controller of your personal data is {TITULAR}, tax ID {NIF}, with registered address at {DOM}. You can contact us at {EMAIL} or on {TEL}."], ["2. Data we process", "We process the data you give us when you place an order (full name, email, phone, shipping address, PC and quantity, chosen payment method and notes), when you write to us or use the assistant, when you subscribe to our news and when you post a review. This website does not store card numbers or banking credentials."], ["3. Purposes and legal basis", "To manage your order, shipping, invoicing and warranty (performance of a contract, Art. 6.1.b GDPR). To answer your enquiries and complaints (Art. 6.1.b and 6.1.f GDPR). To meet tax and accounting obligations (Art. 6.1.c GDPR). To publish your reviews and send you news or offers by email, only if you have given your consent, which you can withdraw at any time (Art. 6.1.a GDPR)."], ["4. Retention", "We keep your data for as long as the contractual relationship lasts and, afterwards, for the limitation and retention periods required by commercial, tax and consumer law. Newsletter subscription data is kept until you withdraw your consent or unsubscribe."], ["5. Recipients", "We do not share your data with third parties except where legally required. Service providers needed to fulfil your order (transport and courier, web hosting, email and payment services) may access it as processors under a contract in accordance with Art. 28 GDPR. We do not make international data transfers; if any provider is located outside the European Economic Area, appropriate safeguards (such as standard contractual clauses) will be used."], ["6. Your rights", "You may exercise your rights of access, rectification, erasure, objection, restriction of processing and portability, and withdraw your consent, by writing to {EMAIL} and identifying yourself. If you believe your data is not being processed properly, you have the right to lodge a complaint with the Spanish Data Protection Agency (www.aepd.es)."], ["7. Data stored on your device", "This website stores in your browser (local storage) your language, light or dark theme, your reviews, your participation in the prize wheel and the orders placed from that device, so that you can check their tracking. This data is not sent to any server and you can delete it at any time from your browser settings."], ["8. Third-party services", "Fonts are loaded from Google Fonts, so Google may receive your IP address. If you use the WhatsApp button, the conversation is governed by that service's privacy policy. Sending an order opens your email app: the message is transmitted through your email provider."], ["9. Security", "We apply appropriate technical and organisational measures to protect your data against unauthorised access, loss or alteration."], ["10. Minors", "Our services are aimed at adults. If you are under 14, you must not give us personal data without the consent of your parents or guardians."], ["11. Changes to this policy", "We may update this policy to reflect changes in law or in our services. Last updated: {FECHA}."]]}}, "cookies": {"es": {"t": "Política de cookies", "s": [["1. ¿Qué son las cookies?", "Las cookies y tecnologías similares (como el almacenamiento local del navegador) son pequeños archivos que un sitio web guarda en tu dispositivo para recordar información sobre tu visita."], ["2. Qué utilizamos en esta web", "Esta web no utiliza cookies de seguimiento, analítica ni publicidad. Solo usa almacenamiento local técnico y de preferencias, propio y sin caducidad automática: techcompany-lang (tu idioma), techcompany-theme (tema claro u oscuro), techcompany-cookies (que has visto este aviso), techcompany-reviews (las opiniones que publicas), techcompany-spin (tu participación en la ruleta de premios) y techcompany-orders (los pedidos hechos desde este dispositivo, para el seguimiento)."], ["3. Base legal", "Según el artículo 22.2 de la LSSI-CE, el almacenamiento estrictamente necesario para prestar un servicio solicitado por el usuario, o para recordar sus preferencias, está exento del deber de obtener consentimiento. Por eso este aviso es informativo y no hay cookies que aceptar o rechazar."], ["4. Servicios de terceros", "Las tipografías se cargan desde Google Fonts, lo que puede implicar que Google reciba tu dirección IP y datos técnicos del navegador. El botón de WhatsApp enlaza a un servicio externo con su propia política de privacidad."], ["5. Cómo borrarlas o bloquearlas", "Puedes eliminar o bloquear el almacenamiento del sitio desde los ajustes de tu navegador (Chrome, Firefox, Safari, Edge…), normalmente en «Privacidad y seguridad». Si lo haces, se perderán tu idioma, tema y pedidos guardados en el dispositivo."], ["6. Actualizaciones", "Si en el futuro incorporamos cookies que requieran consentimiento, te lo pediremos antes de instalarlas y actualizaremos esta política. Última actualización: {FECHA}."]]}, "ca": {"t": "Política de cookies", "s": [["1. Què són les cookies?", "Les cookies i tecnologies similars (com l'emmagatzematge local del navegador) són petits fitxers que un lloc web desa al teu dispositiu per recordar informació sobre la teva visita."], ["2. Què utilitzem en aquest web", "Aquest web no utilitza cookies de seguiment, analítica ni publicitat. Només fa servir emmagatzematge local tècnic i de preferències, propi i sense caducitat automàtica: techcompany-lang (el teu idioma), techcompany-theme (tema clar o fosc), techcompany-cookies (que has vist aquest avís), techcompany-reviews (les opinions que publiques), techcompany-spin (la teva participació a la ruleta de premis) i techcompany-orders (les comandes fetes des d'aquest dispositiu, per al seguiment)."], ["3. Base legal", "Segons l'article 22.2 de la LSSI-CE, l'emmagatzematge estrictament necessari per prestar un servei sol·licitat per l'usuari, o per recordar-ne les preferències, està exempt del deure d'obtenir consentiment. Per això aquest avís és informatiu i no hi ha cookies que acceptar o rebutjar."], ["4. Serveis de tercers", "Les tipografies es carreguen des de Google Fonts, cosa que pot implicar que Google rebi la teva adreça IP i dades tècniques del navegador. El botó de WhatsApp enllaça a un servei extern amb la seva pròpia política de privadesa."], ["5. Com esborrar-les o bloquejar-les", "Pots eliminar o bloquejar l'emmagatzematge del lloc des dels ajustos del teu navegador (Chrome, Firefox, Safari, Edge…), normalment a «Privadesa i seguretat». Si ho fas, es perdran el teu idioma, tema i comandes desades al dispositiu."], ["6. Actualitzacions", "Si en el futur incorporem cookies que requereixin consentiment, te'l demanarem abans d'instal·lar-les i actualitzarem aquesta política. Darrera actualització: {FECHA}."]]}, "en": {"t": "Cookie policy", "s": [["1. What are cookies?", "Cookies and similar technologies (such as your browser's local storage) are small files that a website saves on your device to remember information about your visit."], ["2. What we use on this website", "This website does not use tracking, analytics or advertising cookies. It only uses first-party technical and preference storage with no automatic expiry: techcompany-lang (your language), techcompany-theme (light or dark theme), techcompany-cookies (that you have seen this notice), techcompany-reviews (the reviews you post), techcompany-spin (your participation in the prize wheel) and techcompany-orders (the orders placed from this device, for tracking)."], ["3. Legal basis", "Under Article 22.2 of the LSSI-CE, storage strictly necessary to provide a service requested by the user, or to remember their preferences, is exempt from the duty to obtain consent. This notice is therefore informational and there are no cookies to accept or reject."], ["4. Third-party services", "Fonts are loaded from Google Fonts, which may mean Google receives your IP address and technical browser data. The WhatsApp button links to an external service with its own privacy policy."], ["5. How to delete or block them", "You can delete or block site storage from your browser settings (Chrome, Firefox, Safari, Edge…), usually under “Privacy and security”. If you do, your language, theme and the orders saved on the device will be lost."], ["6. Updates", "If we add cookies that require consent in the future, we will ask for it before installing them and update this policy. Last updated: {FECHA}."]]}}, "condiciones": {"es": {"t": "Condiciones de compra", "s": [["1. Objeto y partes", "Estas condiciones regulan la compra de ordenadores y servicios asociados a través de este sitio web entre {TITULAR} (NIF {NIF}, domicilio en {DOM}), en adelante TechCompany, y el comprador. Al enviar un pedido, el comprador declara haber leído y aceptado estas condiciones, el Aviso Legal y la Política de Privacidad."], ["2. Proceso de compra", "El comprador elige el equipo, la cantidad y el método de pago y rellena el formulario de pedido. El contrato se perfecciona cuando TechCompany confirma el pedido, con el número de pedido y el código de seguimiento, por correo electrónico o teléfono. TechCompany podrá rechazar un pedido por falta de disponibilidad, datos incorrectos o sospecha de fraude, y lo comunicará al comprador."], ["3. Precios", "Todos los precios se muestran en euros e incluyen el IVA. En las opciones A y B el precio final incluye el envío, el montaje, Windows 11 instalado, monitor, teclado y ratón. La opción C se vende con IVA incluido y sin monitor; sus gastos de envío se confirman al tramitar el pedido. Los códigos promocionales y premios de la ruleta se aplican según sus condiciones y no son acumulables salvo indicación expresa."], ["4. Formas de pago", "Se admiten tarjeta de crédito o débito, PayPal, Bizum, Apple Pay / Google Pay, transferencia bancaria y contra reembolso. TechCompany confirmará al comprador por correo o teléfono cómo completar el pago según el método elegido. En el pago contra reembolso el importe se abona al recibir el pedido."], ["5. Plazo y condiciones de entrega", "El plazo estimado de entrega es de unos 4 días laborables desde la confirmación del pedido, salvo disponibilidad de componentes o causas de fuerza mayor; en todo caso no superará los 30 días naturales (art. 66 bis TRLGDCU). El envío está asegurado. Al recibir el paquete, el comprador debe comprobar su estado y, si presenta daños visibles, anotarlo en el albarán del transportista y avisarnos en 48 horas. El riesgo de pérdida o deterioro pasa al comprador con la entrega."], ["6. Seguimiento del pedido", "Con el código de seguimiento puedes consultar el estado y la fecha estimada de entrega en la pestaña «Seguimiento». Las fechas son estimaciones y pueden variar por causas ajenas a TechCompany."], ["7. Derecho de desistimiento", "Tienes derecho a desistir del contrato en un plazo de 14 días naturales desde la recepción del producto, sin necesidad de justificación. Para ejercerlo, comunica tu decisión de forma inequívoca a {EMAIL} indicando tu nombre, número de pedido y equipo. Devuelve el producto en un plazo máximo de 14 días desde esa comunicación, en su embalaje original y con todos sus accesorios. TechCompany reembolsará el importe, incluidos los gastos de envío de ida (salvo los costes adicionales por elegir una modalidad más cara que la estándar), en un máximo de 14 días desde que reciba la comunicación, pudiendo retener el reembolso hasta recibir el producto o la prueba de su devolución. Los gastos directos de devolución corren a cargo del comprador. Responderás de la disminución de valor del producto por una manipulación distinta de la necesaria para comprobar su naturaleza y funcionamiento."], ["8. Excepciones al desistimiento", "Según el art. 103 del TRLGDCU, no procede el desistimiento en los bienes confeccionados conforme a las especificaciones del consumidor o claramente personalizados, como los equipos con componentes cambiados a petición del cliente, ni en los precintados que no sean aptos para su devolución por razones de protección de la salud o de higiene una vez abiertos."], ["9. Garantía legal y soporte", "Los productos cuentan con la garantía legal de conformidad de 3 años desde la entrega prevista en el Real Decreto Legislativo 1/2007 (TRLGDCU). Si el producto no es conforme, tienes derecho a su reparación o sustitución y, si estas no fueran posibles o resultaran desproporcionadas, a la rebaja del precio o a la resolución del contrato. Las faltas de conformidad que se manifiesten en los dos primeros años se presumen existentes en el momento de la entrega. Además, TechCompany ofrece soporte técnico durante 3 años. La garantía no cubre daños por mal uso, golpes, líquidos, manipulación por terceros o instalación de software no autorizado."], ["10. Atención al cliente y reclamaciones", "Puedes contactar con nosotros en {EMAIL} o en el {TEL}. Disponemos de hojas de reclamaciones a disposición de los consumidores: solicítalas por correo electrónico. También puedes acudir a los servicios de consumo de tu comunidad autónoma o a la Junta Arbitral de Consumo."], ["11. Legislación aplicable", "Estas condiciones se rigen por la legislación española, en particular el TRLGDCU y la LSSI-CE. Última actualización: {FECHA}."]]}, "ca": {"t": "Condicions de compra", "s": [["1. Objecte i parts", "Aquestes condicions regulen la compra d'ordinadors i serveis associats a través d'aquest lloc web entre {TITULAR} (NIF {NIF}, domicili a {DOM}), en endavant TechCompany, i el comprador. En enviar una comanda, el comprador declara haver llegit i acceptat aquestes condicions, l'Avís Legal i la Política de Privadesa."], ["2. Procés de compra", "El comprador tria l'equip, la quantitat i el mètode de pagament i omple el formulari de comanda. El contracte es perfecciona quan TechCompany confirma la comanda, amb el número de comanda i el codi de seguiment, per correu electrònic o telèfon. TechCompany podrà rebutjar una comanda per manca de disponibilitat, dades incorrectes o sospita de frau, i ho comunicarà al comprador."], ["3. Preus", "Tots els preus es mostren en euros i inclouen l'IVA. A les opcions A i B el preu final inclou l'enviament, el muntatge, Windows 11 instal·lat, monitor, teclat i ratolí. L'opció C es ven amb l'IVA inclòs i sense monitor; les seves despeses d'enviament es confirmen en tramitar la comanda. Els codis promocionals i els premis de la ruleta s'apliquen segons les seves condicions i no són acumulables llevat d'indicació expressa."], ["4. Formes de pagament", "S'admeten targeta de crèdit o dèbit, PayPal, Bizum, Apple Pay / Google Pay, transferència bancària i contra reemborsament. TechCompany confirmarà al comprador per correu o telèfon com completar el pagament segons el mètode triat. En el pagament contra reemborsament l'import s'abona en rebre la comanda."], ["5. Termini i condicions de lliurament", "El termini estimat de lliurament és d'uns 4 dies laborables des de la confirmació de la comanda, llevat de disponibilitat de components o causes de força major; en tot cas no superarà els 30 dies naturals (art. 66 bis TRLGDCU). L'enviament està assegurat. En rebre el paquet, el comprador n'ha de comprovar l'estat i, si presenta danys visibles, anotar-ho a l'albarà del transportista i avisar-nos en 48 hores. El risc de pèrdua o deteriorament passa al comprador amb el lliurament."], ["6. Seguiment de la comanda", "Amb el codi de seguiment pots consultar l'estat i la data estimada de lliurament a la pestanya «Seguiment». Les dates són estimacions i poden variar per causes alienes a TechCompany."], ["7. Dret de desistiment", "Tens dret a desistir del contracte en un termini de 14 dies naturals des de la recepció del producte, sense necessitat de justificació. Per exercir-lo, comunica la teva decisió de forma inequívoca a {EMAIL} indicant el teu nom, número de comanda i equip. Retorna el producte en un termini màxim de 14 dies des d'aquesta comunicació, en el seu embalatge original i amb tots els accessoris. TechCompany reemborsarà l'import, incloses les despeses d'enviament d'anada (llevat dels costos addicionals per triar una modalitat més cara que l'estàndard), en un màxim de 14 dies des que rebi la comunicació, i podrà retenir el reemborsament fins a rebre el producte o la prova de la seva devolució. Les despeses directes de devolució van a càrrec del comprador. Respondràs de la disminució de valor del producte per una manipulació diferent de la necessària per comprovar-ne la naturalesa i el funcionament."], ["8. Excepcions al desistiment", "Segons l'art. 103 del TRLGDCU, no escau el desistiment en els béns confeccionats conforme a les especificacions del consumidor o clarament personalitzats, com els equips amb components canviats a petició del client, ni en els precintats que no siguin aptes per a la devolució per raons de protecció de la salut o d'higiene un cop oberts."], ["9. Garantia legal i suport", "Els productes compten amb la garantia legal de conformitat de 3 anys des del lliurament prevista al Reial decret legislatiu 1/2007 (TRLGDCU). Si el producte no és conforme, tens dret a la seva reparació o substitució i, si aquestes no fossin possibles o resultessin desproporcionades, a la rebaixa del preu o a la resolució del contracte. Les faltes de conformitat que es manifestin els dos primers anys es presumeixen existents en el moment del lliurament. A més, TechCompany ofereix suport tècnic durant 3 anys. La garantia no cobreix danys per mal ús, cops, líquids, manipulació per tercers o instal·lació de programari no autoritzat."], ["10. Atenció al client i reclamacions", "Pots contactar amb nosaltres a {EMAIL} o al {TEL}. Disposem de fulls de reclamacions a disposició dels consumidors: sol·licita'ls per correu electrònic. També pots adreçar-te als serveis de consum de la teva comunitat autònoma o a la Junta Arbitral de Consum."], ["11. Legislació aplicable", "Aquestes condicions es regeixen per la legislació espanyola, en particular el TRLGDCU i la LSSI-CE. Darrera actualització: {FECHA}."]]}, "en": {"t": "Terms of sale", "s": [["1. Purpose and parties", "These terms govern the purchase of computers and related services through this website between {TITULAR} (tax ID {NIF}, registered address {DOM}), hereinafter TechCompany, and the buyer. By sending an order, the buyer declares having read and accepted these terms, the Legal Notice and the Privacy Policy."], ["2. Buying process", "The buyer chooses the PC, quantity and payment method and fills in the order form. The contract is formed when TechCompany confirms the order, with the order number and tracking code, by email or phone. TechCompany may reject an order because of lack of stock, incorrect details or suspected fraud, and will notify the buyer."], ["3. Prices", "All prices are shown in euros and include VAT. For options A and B the final price includes shipping, assembly, Windows 11 installed, monitor, keyboard and mouse. Option C is sold VAT included and without a monitor; its shipping costs are confirmed when the order is processed. Promo codes and prize-wheel rewards apply according to their own conditions and cannot be combined unless expressly stated."], ["4. Payment methods", "We accept credit or debit card, PayPal, Bizum, Apple Pay / Google Pay, bank transfer and cash on delivery. TechCompany will confirm by email or phone how to complete payment according to the chosen method. With cash on delivery, the amount is paid when you receive the order."], ["5. Delivery time and conditions", "The estimated delivery time is about 4 working days from order confirmation, subject to component availability or force majeure; in any case it will not exceed 30 calendar days (Art. 66 bis TRLGDCU). Shipping is insured. On receiving the parcel, the buyer must check its condition and, if it shows visible damage, note it on the courier's delivery slip and tell us within 48 hours. Risk of loss or damage passes to the buyer on delivery."], ["6. Order tracking", "With your tracking code you can check the status and estimated delivery date on the “Tracking” tab. Dates are estimates and may change for reasons beyond TechCompany's control."], ["7. Right of withdrawal", "You have the right to withdraw from the contract within 14 calendar days of receiving the product, without giving any reason. To do so, tell us clearly at {EMAIL}, stating your name, order number and PC. Send the product back within 14 days of that notice, in its original packaging and with all accessories. TechCompany will refund the amount, including standard outbound shipping costs (except extra costs for choosing a more expensive method than standard), within 14 days of receiving your notice, and may withhold the refund until it receives the product or proof of its return. Direct return costs are borne by the buyer. You are liable for any loss in value of the product caused by handling beyond what is needed to check its nature and operation."], ["8. Exceptions to withdrawal", "Under Art. 103 TRLGDCU, withdrawal does not apply to goods made to the consumer's specifications or clearly personalised, such as PCs with components changed at the customer's request, or to sealed goods that cannot be returned for health protection or hygiene reasons once opened."], ["9. Legal guarantee and support", "Products carry the 3-year legal guarantee of conformity from delivery under Royal Legislative Decree 1/2007 (TRLGDCU). If the product does not conform, you are entitled to repair or replacement and, if these are impossible or disproportionate, to a price reduction or termination of the contract. Lack of conformity appearing within the first two years is presumed to have existed at the time of delivery. TechCompany also provides technical support for 3 years. The guarantee does not cover damage from misuse, impacts, liquids, third-party tampering or installation of unauthorised software."], ["10. Customer service and complaints", "You can contact us at {EMAIL} or on {TEL}. Complaint forms are available to consumers: request them by email. You may also go to your region's consumer services or the Consumer Arbitration Board."], ["11. Governing law", "These terms are governed by Spanish law, in particular the TRLGDCU and the LSSI-CE. Last updated: {FECHA}."]]}}};
+  var LGKEYS=["aviso","privacidad","cookies","condiciones"], legalTab="aviso";
+  function LV(k){
+    if(k==="FECHA")return fmtD(new Date(2026,9,20).getTime(),{day:"numeric",month:"long",year:"numeric"});
+    var v=LEGAL[k]; return (v&&typeof v==="object")?v[lang]:v;
+  }
+  function legalHTML(t){
+    return esc(t).replace(/\{([A-Z]+)\}/g,function(m,k){
+      if(LEGAL[k]===undefined&&k!=="FECHA")return m;
+      var v=LV(k)||""; return v.charAt(0)==="["?'<mark class="ph" title="'+esc(X("Completa este dato","Completa aquesta dada","Fill in this detail"))+'">'+esc(v)+'</mark>':esc(v);
+    });
+  }
+  function setLegalTab(k){ legalTab=LGKEYS.indexOf(k)>=0?k:"aviso"; renderLegal(); }
+  function renderLegal(){
+    var root=$("#legal-root"); if(!root)return;
+    var tabs='<div class="legal-tabs" role="tablist" aria-label="'+esc(T("Información legal"))+'">'+LGKEYS.map(function(k){
+      return '<a href="#legal/'+k+'" role="tab" aria-selected="'+(k===legalTab)+'"'+(k===legalTab?' aria-current="true"':'')+'>'+esc(LG[k][lang].t)+'</a>';}).join("")+'</div>';
+    var d=LG[legalTab][lang];
+    root.innerHTML=tabs+'<article class="legal-doc"><h2>'+esc(d.t)+'</h2>'+d.s.map(function(x){return '<h3>'+esc(x[0])+'</h3><p>'+legalHTML(x[1])+'</p>';}).join("")+'</article>';
+  }
+
+  /* --- pedidos guardados en este dispositivo --- */
+  var ORD_KEY="techcompany-orders";
+  function loadOrders(){try{var a=JSON.parse(localStorage.getItem(ORD_KEY)||"[]");return Array.isArray(a)?a:[];}catch(e){return [];}}
+  function saveOrders(a){try{localStorage.setItem(ORD_KEY,JSON.stringify(a.slice(0,10)));}catch(e){}}
+  function rid(n,ch){var r="";for(var i=0;i<n;i++)r+=ch.charAt(Math.floor(Math.random()*ch.length));return r;}
+  function calcEta(ts){var d=new Date(ts),n=0;while(n<4){d.setDate(d.getDate()+1);if(d.getDay()!==0&&d.getDay()!==6)n++;}d.setHours(13,0,0,0);return d.getTime();}
+  function newOrder(pid,q,f,total,pay){
+    var ts=Date.now(), d=new Date(ts), z=function(n){return (n<10?"0":"")+n;};
+    return {id:"TC-"+String(d.getFullYear()).slice(2)+z(d.getMonth()+1)+z(d.getDate())+"-"+rid(4,"ABCDEFGHJKLMNPQRSTUVWXYZ23456789"),code:"TC"+rid(10,"0123456789"),ts:ts,eta:calcEta(ts),p:pid,q:q,total:total,pay:pay,addr:f.dir,name:f.nombre};
+  }
+  function demoOrder(){var ts=Date.now()-3.1*864e5;return {id:"TC-EJEMPLO",code:"TC0000000000",ts:ts,eta:calcEta(ts),p:"B",q:1,total:PRODS.B.price,pay:"card",addr:"Calle de Ejemplo 12, 08001 Barcelona",name:"Cliente de ejemplo",demo:true};}
+
+  /* --- eventos del envío (se calculan con la hora real del pedido) --- */
+  var EVT=[
+    {k:"rec",t:["Pedido recibido","Comanda rebuda","Order received"],d:["Hemos recibido tu pedido y lo estamos revisando.","Hem rebut la teva comanda i l'estem revisant.","We have received your order and are reviewing it."],h:["¡Pedido recibido!","Comanda rebuda!","Order received!"]},
+    {k:"pay",t:["Pago confirmado","Pagament confirmat","Payment confirmed"],d:["Pago registrado con {M}.","Pagament registrat amb {M}.","Payment recorded with {M}."],h:["Pago confirmado","Pagament confirmat","Payment confirmed"]},
+    {k:"build",t:["Montando tu PC","Muntant el teu PC","Building your PC"],d:["Nuestros técnicos están montando los componentes.","Els nostres tècnics estan muntant els components.","Our technicians are assembling the components."],h:["Estamos montando tu PC","Estem muntant el teu PC","We're building your PC"]},
+    {k:"qa",t:["Pruebas superadas","Proves superades","Tests passed"],d:["Equipo probado, con Windows 11 instalado y listo para enviar.","Equip provat, amb Windows 11 instal·lat i a punt per enviar.","PC tested, Windows 11 installed and ready to ship."],h:["Tu PC está listo y probado","El teu PC està a punt i provat","Your PC is built and tested"]},
+    {k:"ship",t:["Enviado","Enviat","Shipped"],d:["El paquete ha salido de nuestro taller, asegurado.","El paquet ha sortit del nostre taller, assegurat.","The parcel has left our workshop, insured."],h:["¡Tu PC ya ha salido!","El teu PC ja ha sortit!","Your PC has shipped!"]},
+    {k:"transit",t:["En tránsito","En trànsit","In transit"],d:["Tu pedido está en el centro logístico más cercano a ti.","La teva comanda és al centre logístic més proper a tu.","Your order is at the logistics hub nearest to you."],h:["Tu PC está en camino","El teu PC és de camí","Your PC is on its way"]},
+    {k:"out",t:["En reparto","En repartiment","Out for delivery"],d:["El repartidor lleva tu PC. ¡Llega hoy!","El repartidor porta el teu PC. Arriba avui!","The courier has your PC. It arrives today!"],h:["¡Hoy llega tu PC!","Avui arriba el teu PC!","Your PC arrives today!"]},
+    {k:"del",t:["Entregado","Lliurat","Delivered"],d:["Tu pedido ha sido entregado. ¡Disfruta de tu nuevo PC!","La teva comanda ha estat lliurada. Gaudeix del teu nou PC!","Your order has been delivered. Enjoy your new PC!"],h:["¡Entregado!","Lliurat!","Delivered!"]}
+  ];
+  function LI(a){return a[lang==="ca"?1:(lang==="en"?2:0)];}
+  function evs(o){
+    var sp=o.eta-o.ts;
+    return [o.ts,o.ts+18e4,o.ts+4*36e5,o.ts+sp*.28,o.ts+sp*.52,o.ts+sp*.76,Math.max(o.ts+sp*.8,o.eta-5*36e5),o.eta];
+  }
+  function stageIdx(E,now){var i=0;E.forEach(function(t,k){if(now>=t)i=k;});return i;}
+  function fillOf(E,now){
+    var i=stageIdx(E,now); if(i>=7)return 1;
+    var f=Math.max(0,Math.min(1,(now-E[i])/(E[i+1]-E[i]))), e=i+f, bp=[0,2,4,6,7], v=[0,.25,.5,.75,1];
+    for(var k=0;k<4;k++){ if(e<=bp[k+1])return v[k]+(v[k+1]-v[k])*(e-bp[k])/(bp[k+1]-bp[k]); }
+    return 1;
+  }
+  function rel(ts){
+    var s=Math.round((ts-Date.now())/1000), a=Math.abs(s), u="second", n=s;
+    if(a<60)return X("hace unos segundos","fa uns segons","a few seconds ago");
+    if(a<3600){u="minute";n=Math.round(s/60);}else if(a<172800){u="hour";n=Math.round(s/3600);}else{u="day";n=Math.round(s/86400);}
+    try{return new Intl.RelativeTimeFormat(LANGTAG[lang],{numeric:"auto"}).format(n,u);}catch(e){return "";}
+  }
+  function cdVals(o){var s=Math.floor(Math.max(0,o.eta-Date.now())/1000);return [Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60];}
+  function z2(n){return (n<10?"0":"")+n;}
+  function ico(k){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-'+k+'"/></svg>';}
+
+  /* --- consulta --- */
+  var trkCur=null, trkErr="", trkIdx=-1;
+  function normCode(x){return String(x||"").toUpperCase().replace(/[^A-Z0-9]/g,"");}
+  function lookupCode(c){
+    var n=normCode(c); trkErr=""; trkCur=null;
+    if(!n){trkErr="empty";return false;}
+    if(n==="TC0000000000"||n==="EJEMPLO"||n==="TCEJEMPLO"){trkCur=demoOrder();return true;}
+    var a=loadOrders();
+    for(var i=0;i<a.length;i++){ if(normCode(a[i].code)===n||normCode(a[i].id)===n){trkCur=a[i];return true;} }
+    trkErr="nf"; return false;
+  }
+  function trkEnter(arg){ if(arg){ lookupCode(arg); var inp=$("#trk-in"); if(inp)inp.value=normCode(arg); } renderTrk(); }
+
+  function recentHTML(){
+    var a=loadOrders().slice(0,4), h='<div class="trk-recent">';
+    if(a.length){ h+='<span>'+esc(X("Tus pedidos:","Les teves comandes:","Your orders:"))+'</span>'+a.map(function(o){return '<button type="button" class="trk-chip" data-code="'+esc(o.code)+'">'+esc(o.code)+'</button>';}).join(""); }
+    h+='<button type="button" class="trk-chip demo" data-code="TC0000000000">'+esc(X("Ver un pedido de ejemplo","Veure una comanda d'exemple","See a sample order"))+'</button></div>';
+    return h;
+  }
+  function routeSVG(){
+    var path="M40,108 C120,18 205,160 300,86 S470,22 560,92";
+    return '<svg viewBox="0 0 600 150" role="img" aria-label="'+esc(X("Ruta del envío","Ruta de l'enviament","Delivery route"))+'">'+
+      '<defs><pattern id="rt-grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="currentColor" stroke-opacity=".12"/></pattern></defs>'+
+      '<rect width="600" height="150" fill="url(#rt-grid)" style="color:var(--text)"/>'+
+      '<path id="rt-path" class="base" d="'+path+'"/><path id="rt-done" class="rdone" d="'+path+'"/>'+
+      '<g transform="translate(40,108)"><circle r="12" fill="#141414"/><g transform="translate(-9,-9) scale(.75)" fill="none" stroke="#FFDD00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><use href="#i-box" width="24" height="24"/></g></g>'+
+      '<text x="40" y="140" text-anchor="start">'+esc(X("Taller TechCompany","Taller TechCompany","TechCompany workshop"))+'</text>'+
+      '<g transform="translate(560,92)"><circle r="14" fill="#C8102E"/><g transform="translate(-10,-10) scale(.83)" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><use href="#i-home" width="24" height="24"/></g></g>'+
+      '<text x="560" y="128" text-anchor="end">'+esc(X("Tu casa","La teva casa","Your home"))+'</text>'+
+      '<g id="rt-truck" transform="translate(40,108)"><circle r="19" fill="#FFDD00" stroke="#141414" stroke-width="3"/><g transform="translate(-11,-11) scale(.92)" fill="none" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-truck" width="24" height="24"/></g></g></svg>';
+  }
+  function renderTrk(){
+    var root=$("#trk-root"); if(!root)return;
+    var h=recentHTML();
+    if(trkErr){
+      h+='<div class="trk-err" role="alert">'+esc(trkErr==="empty"?X("Escribe tu código de seguimiento (empieza por TC).","Escriu el teu codi de seguiment (comença per TC).","Enter your tracking code (it starts with TC)."):X("No encontramos ningún pedido con ese código. Revísalo e inténtalo de nuevo. Los pedidos se guardan en el dispositivo desde el que se hicieron.","No trobem cap comanda amb aquest codi. Revisa'l i torna-ho a provar. Les comandes es desen al dispositiu des del qual es van fer.","We couldn't find an order with that code. Check it and try again. Orders are saved on the device they were placed from."))+'</div>';
+      root.innerHTML=h; trkIdx=-1; return;
+    }
+    if(!trkCur){
+      h+='<div class="trk-empty">'+ico("box")+'<p><b>'+esc(X("Aquí verás dónde está tu PC","Aquí veuràs on és el teu PC","Here you'll see where your PC is"))+'</b><br>'+esc(X("Escribe el código de seguimiento que te damos al hacer el pedido.","Escriu el codi de seguiment que et donem en fer la comanda.","Type the tracking code we give you when you place your order."))+'</p></div>';
+      root.innerHTML=h; trkIdx=-1; return;
+    }
+    var o=trkCur, now=Date.now(), E=evs(o), idx=stageIdx(E,now); trkIdx=idx;
+    var prod=PRODS[o.p]||PRODS.A, fresh=(now-o.ts<30*60e3&&idx<=1), head=fresh?X("¡Acabas de comprarlo!","Acabes de comprar-lo!","You've just bought it!"):LI(EVT[idx].h);
+    var sub=X("Pedido realizado ","Comanda feta ","Order placed ")+rel(o.ts)+" · "+esc(o.id);
+    var cd=cdVals(o), delivered=(idx>=7);
+    var etaBox='<div class="trk-eta"><small>'+esc(delivered?X("Entregado el","Lliurat el","Delivered on"):X("Entrega estimada","Lliurament estimat","Estimated delivery"))+'</small><div class="date">'+esc(fmtD(delivered?E[7]:o.eta,{weekday:"long",day:"numeric",month:"long"}))+'</div>'+
+      (delivered?'<div class="trk-done-msg">'+esc(LI(EVT[7].d))+'</div>':'<div class="win">'+esc(X("Entre las 9:00 y las 14:00","Entre les 9:00 i les 14:00","Between 9 am and 2 pm"))+'</div>'+
+      '<div class="cd" role="timer" aria-label="'+esc(X("Tiempo restante","Temps restant","Time remaining"))+'"><div><b id="cd-d">'+cd[0]+'</b><span>'+esc(X("días","dies","days"))+'</span></div><div><b id="cd-h">'+z2(cd[1])+'</b><span>'+esc(X("horas","hores","hours"))+'</span></div><div><b id="cd-m">'+z2(cd[2])+'</b><span>'+esc(X("min","min","min"))+'</span></div><div><b id="cd-s">'+z2(cd[3])+'</b><span>'+esc(X("seg","seg","sec"))+'</span></div></div>')+'</div>';
+    var stNames=[["Pedido","Comanda","Ordered"],["Montaje","Muntatge","Assembly"],["Enviado","Enviat","Shipped"],["En reparto","En repartiment","Out for delivery"],["Entregado","Lliurat","Delivered"]], stIc=["clip","cpu","truck","box","home"], stEv=[0,2,4,6,7], curSt=0;
+    stEv.forEach(function(e,k){if(idx>=e)curSt=k;});
+    var steps='<div class="steps"><div class="fill" id="trk-fill"></div>'+stNames.map(function(n,k){
+      var cls=(delivered||k<curSt)?"fin":(k===curSt?"cur":"");
+      return '<div class="st '+cls+'"><div class="st-ic">'+ico((delivered||k<curSt)?"check":stIc[k])+'</div><b>'+esc(LI(n))+'</b></div>';}).join("")+'</div>';
+    var pm=T(PAYN[o.pay]||"");
+    var info='<div class="trk-info">'+(IMGS[o.p]?'<img src="'+IMGS[o.p]+'" alt="'+esc(T(prod.name))+'">':'<span></span>')+
+      '<div class="kv"><small>'+esc(X("Equipo","Equip","PC"))+'</small><b>'+esc(T(prod.name))+' × '+o.q+'</b><br><small>'+esc(X("Total","Total","Total"))+'</small><b>'+esc(eur(o.total))+'</b></div>'+
+      '<div class="kv"><small>'+esc(X("Código de seguimiento","Codi de seguiment","Tracking code"))+'</small><b>'+esc(o.code)+'</b><br><small>'+esc(X("Dirección de entrega","Adreça de lliurament","Delivery address"))+'</small><b>'+esc(o.addr)+'</b></div></div>';
+    var tl='<ul class="tl">'+EVT.map(function(ev,k){
+      var done=now>=E[k], cur=(k===idx&&idx<7), cls=done?(cur?"cur":"fin"):"fut";
+      var tm=done?fmtD(E[k],{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}):X("Previsto: ","Previst: ","Expected: ")+fmtD(E[k],{day:"numeric",month:"short"});
+      return '<li class="'+cls+'"><span class="dot">'+(done&&!cur?ico("check"):"")+'</span><div class="tt">'+esc(LI(ev.t))+'</div><div class="tm">'+esc(tm)+'</div><p class="td">'+esc(LI(ev.d).replace("{M}",pm))+'</p></li>';}).join("")+'</ul>';
+    h+='<article class="trk-card"><div class="trk-top"><div>'+(o.demo?'<span class="trk-ribbon">'+esc(X("Pedido de ejemplo","Comanda d'exemple","Sample order"))+'</span>':'')+'<h2>'+esc(head)+'</h2><p>'+sub+'</p></div>'+etaBox+'</div>'+
+      '<div class="trk-prog">'+steps+'</div><div class="route">'+routeSVG()+'</div>'+info+tl+
+      '<p class="trk-foot">'+esc(X("¿Dudas con tu envío? Escríbenos a ","Dubtes amb el teu enviament? Escriu-nos a ","Questions about your delivery? Write to us at "))+'<a href="mailto:techcompany@gmail.com">techcompany@gmail.com</a>. '+esc(X("Los datos de seguimiento se guardan en este dispositivo.","Les dades de seguiment es desen en aquest dispositiu.","Tracking data is stored on this device."))+'</p></article>';
+    root.innerHTML=h;
+    var fillV=fillOf(E,now), fl=$("#trk-fill");
+    requestAnimationFrame(function(){ if(fl)fl.style.width=(fillV*80)+"%"; animRoute(fillV); });
+  }
+  function animRoute(frac){
+    var path=$("#rt-path"), dn=$("#rt-done"), tr=$("#rt-truck"); if(!path||!dn||!tr)return;
+    var L=path.getTotalLength();
+    function place(f){var pt=path.getPointAtLength(L*f);tr.setAttribute("transform","translate("+pt.x+","+pt.y+")");}
+    dn.style.strokeDasharray=L;
+    if(RM){dn.style.strokeDashoffset=L*(1-frac);place(frac);return;}
+    dn.style.strokeDashoffset=L; place(0);
+    requestAnimationFrame(function(){dn.style.strokeDashoffset=L*(1-frac);});
+    var t0=null;
+    (function stp(ts){ if(t0===null)t0=ts; var k=Math.min(1,(ts-t0)/1600), e=1-Math.pow(1-k,3); place(frac*e); if(k<1)requestAnimationFrame(stp); })(performance.now());
+  }
+  function trkTick(){
+    if(current!=="seguimiento"||!trkCur)return;
+    var E=evs(trkCur), idx=stageIdx(E,Date.now());
+    if(idx!==trkIdx){renderTrk();return;}
+    if(idx>=7)return;
+    var c=cdVals(trkCur), a=$("#cd-d"); if(!a)return;
+    a.textContent=c[0]; $("#cd-h").textContent=z2(c[1]); $("#cd-m").textContent=z2(c[2]); $("#cd-s").textContent=z2(c[3]);
+  }
+  setInterval(trkTick,1000);
+  $("#trk-form").addEventListener("submit",function(e){
+    e.preventDefault(); lookupCode($("#trk-in").value); renderTrk();
+    var t=$("#trk-root .trk-card, #trk-root .trk-err"); if(t)t.scrollIntoView({behavior:RM?"auto":"smooth",block:"nearest"});
+  });
+  $("#trk-root").addEventListener("click",function(e){
+    var b=e.target.closest("[data-code]"); if(!b)return;
+    lookupCode(b.dataset.code); $("#trk-in").value=(trkCur&&!trkCur.demo)?trkCur.code:""; renderTrk();
+    var t=$("#trk-root .trk-card"); if(t)t.scrollIntoView({behavior:RM?"auto":"smooth",block:"nearest"});
+  });
+
+  /* --- tarjeta de "pedido realizado" --- */
+  function renderOk(){
+    var host=$("#ok-card"); if(!host||!lastOrder||!lastOrder.ord)return;
+    var o=lastOrder.ord, conf="";
+    if(!host.dataset.conf){
+      host.dataset.conf="1"; var cols=["#C8102E","#FFDD00","#141414","#1FA74A"];
+      for(var i=0;i<22;i++)conf+='<i style="left:'+Math.round(Math.random()*98)+'%;background:'+cols[i%4]+';animation-delay:'+(Math.random()*.7).toFixed(2)+'s;animation-duration:'+(1.9+Math.random()*1.2).toFixed(2)+'s"></i>';
+      host.dataset.confHtml=conf;
+    }
+    host.innerHTML='<div class="confetti" aria-hidden="true">'+(host.dataset.confHtml||"")+'</div>'+
+      '<div class="ok-check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>'+
+      '<h3>'+esc(X("¡Pedido realizado!","Comanda realitzada!","Order placed!"))+'</h3>'+
+      '<span class="ok-paid">'+ico("check")+esc(X("Pago confirmado","Pagament confirmat","Payment confirmed"))+' · '+esc(T(PAYN[o.pay]))+'</span>'+
+      '<div class="ok-grid"><div class="ok-cell"><small>'+esc(X("Nº de pedido","Núm. de comanda","Order no."))+'</small><b class="mono">'+esc(o.id)+'</b></div>'+
+      '<div class="ok-cell"><small>'+esc(X("Código de seguimiento","Codi de seguiment","Tracking code"))+'</small><b class="mono" id="ok-code">'+esc(o.code)+'</b><button type="button" data-copycode="'+esc(o.code)+'">'+esc(X("Copiar código","Copiar codi","Copy code"))+'</button></div>'+
+      '<div class="ok-cell"><small>'+esc(X("Entrega estimada","Lliurament estimat","Estimated delivery"))+'</small><b>'+esc(fmtD(o.eta,{weekday:"long",day:"numeric",month:"long"}))+'</b></div></div>'+
+      '<a class="btn" href="#seguimiento/'+encodeURIComponent(o.code)+'">'+esc(X("Seguir mi pedido","Seguir la meva comanda","Track my order"))+'</a>'+
+      '<p class="ok-note">'+esc(X("Guarda tu código: lo necesitas para consultar el estado del envío. También lo incluimos en el correo del pedido.","Guarda el teu codi: el necessites per consultar l'estat de l'enviament. També l'incloem al correu de la comanda.","Keep your code: you need it to check the shipping status. We also include it in the order email."))+'</p>';
+  }
+  document.addEventListener("click",function(e){
+    var b=e.target.closest("[data-copycode]"); if(!b)return;
+    var c=b.dataset.copycode, lab=b.textContent;
+    function ok(){b.textContent=X("¡Copiado!","Copiat!","Copied!");setTimeout(function(){b.textContent=lab;},1800);}
+    try{navigator.clipboard.writeText(c).then(ok,function(){});}catch(x){}
+  });
 
   /* ===== Animaciones al hacer scroll ===== */
   var srIO=null, srLive=false;
@@ -1127,6 +1510,17 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
     ca:"Cada equip té la seva valoració mitjana de 0 a 5 estrelles i les opinions d'altres clients a la pestanya Opinions. Allà també pots escriure la teva: tries l'equip, el puntues de 0 a 5 estrelles i expliques la teva experiència.",
     en:"Each PC has an average rating from 0 to 5 stars, plus reviews from other customers, on the Reviews tab. You can write yours there too: pick the PC, rate it from 0 to 5 stars and tell us about your experience.",act:["reviews","catalog"]};};
 
+  ACTS.track={l:{es:"Seguir mi pedido",ca:"Seguir la meva comanda",en:"Track my order"},h:function(){return "#seguimiento";},close:1};
+  ACTS.legal={l:{es:"Ver información legal",ca:"Veure informació legal",en:"View legal information"},h:function(){return "#legal/condiciones";},close:1};
+  KB.status=function(){return {
+    es:"Puedes seguir tu pedido en la pestaña «Seguimiento»: escribe el código que te aparece al hacer el pedido (empieza por TC) y verás en qué fase está, la fecha estimada de entrega y cuánto falta para que llegue. Si no encuentras tu código o tienes dudas, escríbenos.",
+    ca:"Pots seguir la teva comanda a la pestanya «Seguiment»: escriu el codi que et surt en fer la comanda (comença per TC) i veuràs en quina fase és, la data estimada de lliurament i quant falta perquè arribi. Si no trobes el teu codi o tens dubtes, escriu-nos.",
+    en:"You can follow your order on the “Tracking” tab: enter the code you get when you place the order (it starts with TC) and you'll see what stage it's at, the estimated delivery date and how long is left until it arrives. If you can't find your code or have questions, write to us.",act:["track","mail"]};};
+  KB.legal=function(){return {
+    es:"En la sección de información legal tienes el Aviso legal, la Política de privacidad, la Política de cookies y las Condiciones de compra. Allí se explica, por ejemplo, el derecho de desistimiento de 14 días y la garantía legal de 3 años.",
+    ca:"A la secció d'informació legal tens l'Avís legal, la Política de privadesa, la Política de cookies i les Condicions de compra. Allà s'explica, per exemple, el dret de desistiment de 14 dies i la garantia legal de 3 anys.",
+    en:"The legal information section has the Legal notice, Privacy policy, Cookie policy and Terms of sale. It explains, for example, the 14-day right of withdrawal and the 3-year legal guarantee.",act:["legal"]};};
+
   /*INTENTS-START*/
   var INTENTS=[
     ["greet",["hola","buenas","buenos dias","bon dia","bona tarda","hello"]],
@@ -1162,6 +1556,7 @@ details[open] .in{animation:rise .35s both}.card{transition:transform .2s,box-sh
     includes:["include","comes with","keyboard","mouse","installed","what do i get"],contact:["phone","call","email","contact","talk to","speak to","human","customer service","whatsapp","opening hours"],howorder:["how do i order","how to order","how can i order","how to buy","place an order","order form","buy","order","purchase"]};
   INTENTS.forEach(function(it){if(EK[it[0]])it[1]=it[1].concat(EK[it[0]]);});
   INTENTS.push(["reviews",["resena","opinion","valoracion","estrella","puntuar","ressenya","opinio","valoracio","estrelles","puntuacio","review","rating","stars","feedback"]]);
+  INTENTS.push(["legal",["aviso legal","privacidad","proteccion de datos","rgpd","cookies","condiciones de compra","terminos","desistimiento","avis legal","privadesa","proteccio de dades","condicions de compra","desistiment","legal notice","privacy","data protection","gdpr","terms","conditions","withdrawal","cooling off","14 days","14 dias","14 dies"]]);
   /*INTENTS-END*/
 
   function askAI(){
